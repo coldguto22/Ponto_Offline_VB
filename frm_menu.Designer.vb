@@ -24,116 +24,111 @@ Partial Class frm_menu
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_menu))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.GereciamentoDeClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CadastrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CadastroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AplicativosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HoráriosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FuncionáriosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GerenciamentoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CalculadoraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BlocoDeNotasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EncerrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SairDoProgramaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BatchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GerenciarListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AppsÚteisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CalculadoraDeHorasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EncerrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GereciamentoDeClientesToolStripMenuItem, Me.AplicativosToolStripMenuItem, Me.EncerrarToolStripMenuItem})
+        Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CadastrosToolStripMenuItem, Me.GerenciamentoToolStripMenuItem, Me.AppsÚteisToolStripMenuItem, Me.EncerrarToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(800, 24)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(933, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
-        'GereciamentoDeClientesToolStripMenuItem
+        'CadastrosToolStripMenuItem
         '
-        Me.GereciamentoDeClientesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CadastroToolStripMenuItem})
-        Me.GereciamentoDeClientesToolStripMenuItem.Name = "GereciamentoDeClientesToolStripMenuItem"
-        Me.GereciamentoDeClientesToolStripMenuItem.Size = New System.Drawing.Size(154, 20)
-        Me.GereciamentoDeClientesToolStripMenuItem.Text = "&Gereciamento de Clientes"
+        Me.CadastrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CadastroToolStripMenuItem, Me.HoráriosToolStripMenuItem, Me.FuncionáriosToolStripMenuItem})
+        Me.CadastrosToolStripMenuItem.Name = "CadastrosToolStripMenuItem"
+        Me.CadastrosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
+        Me.CadastrosToolStripMenuItem.Text = "&Cadastros"
         '
         'CadastroToolStripMenuItem
         '
         Me.CadastroToolStripMenuItem.Image = CType(resources.GetObject("CadastroToolStripMenuItem.Image"), System.Drawing.Image)
         Me.CadastroToolStripMenuItem.Name = "CadastroToolStripMenuItem"
-        Me.CadastroToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.CadastroToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.CadastroToolStripMenuItem.Text = "Cadastro"
+        Me.CadastroToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.CadastroToolStripMenuItem.Text = "Empresa"
         '
-        'AplicativosToolStripMenuItem
+        'HoráriosToolStripMenuItem
         '
-        Me.AplicativosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WindowsToolStripMenuItem, Me.BatchToolStripMenuItem})
-        Me.AplicativosToolStripMenuItem.Name = "AplicativosToolStripMenuItem"
-        Me.AplicativosToolStripMenuItem.Size = New System.Drawing.Size(77, 20)
-        Me.AplicativosToolStripMenuItem.Text = "&Aplicativos"
+        Me.HoráriosToolStripMenuItem.Name = "HoráriosToolStripMenuItem"
+        Me.HoráriosToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.HoráriosToolStripMenuItem.Text = "Horários"
+        '
+        'FuncionáriosToolStripMenuItem
+        '
+        Me.FuncionáriosToolStripMenuItem.Name = "FuncionáriosToolStripMenuItem"
+        Me.FuncionáriosToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.FuncionáriosToolStripMenuItem.Text = "Funcionários"
+        '
+        'GerenciamentoToolStripMenuItem
+        '
+        Me.GerenciamentoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WindowsToolStripMenuItem, Me.BatchToolStripMenuItem})
+        Me.GerenciamentoToolStripMenuItem.Name = "GerenciamentoToolStripMenuItem"
+        Me.GerenciamentoToolStripMenuItem.Size = New System.Drawing.Size(106, 20)
+        Me.GerenciamentoToolStripMenuItem.Text = "&Gerenciamento"
         '
         'WindowsToolStripMenuItem
         '
-        Me.WindowsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculadoraToolStripMenuItem, Me.ExcelToolStripMenuItem, Me.BlocoDeNotasToolStripMenuItem})
         Me.WindowsToolStripMenuItem.Name = "WindowsToolStripMenuItem"
-        Me.WindowsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.WindowsToolStripMenuItem.Text = "Windows"
-        '
-        'CalculadoraToolStripMenuItem
-        '
-        Me.CalculadoraToolStripMenuItem.Name = "CalculadoraToolStripMenuItem"
-        Me.CalculadoraToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F1), System.Windows.Forms.Keys)
-        Me.CalculadoraToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.CalculadoraToolStripMenuItem.Text = "Calculadora"
-        '
-        'ExcelToolStripMenuItem
-        '
-        Me.ExcelToolStripMenuItem.Name = "ExcelToolStripMenuItem"
-        Me.ExcelToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F2), System.Windows.Forms.Keys)
-        Me.ExcelToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.ExcelToolStripMenuItem.Text = "Excel"
-        '
-        'BlocoDeNotasToolStripMenuItem
-        '
-        Me.BlocoDeNotasToolStripMenuItem.Name = "BlocoDeNotasToolStripMenuItem"
-        Me.BlocoDeNotasToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F3), System.Windows.Forms.Keys)
-        Me.BlocoDeNotasToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.BlocoDeNotasToolStripMenuItem.Text = "Bloco de Notas"
-        '
-        'EncerrarToolStripMenuItem
-        '
-        Me.EncerrarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SairDoProgramaToolStripMenuItem})
-        Me.EncerrarToolStripMenuItem.Name = "EncerrarToolStripMenuItem"
-        Me.EncerrarToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
-        Me.EncerrarToolStripMenuItem.Text = "&Encerrar"
-        '
-        'SairDoProgramaToolStripMenuItem
-        '
-        Me.SairDoProgramaToolStripMenuItem.Name = "SairDoProgramaToolStripMenuItem"
-        Me.SairDoProgramaToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.SairDoProgramaToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.SairDoProgramaToolStripMenuItem.Text = "Sair do Programa"
+        Me.WindowsToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.WindowsToolStripMenuItem.Text = "Importar Batidas"
         '
         'BatchToolStripMenuItem
         '
-        Me.BatchToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GerenciarListaToolStripMenuItem})
         Me.BatchToolStripMenuItem.Name = "BatchToolStripMenuItem"
-        Me.BatchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.BatchToolStripMenuItem.Text = "Batch"
+        Me.BatchToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.BatchToolStripMenuItem.Text = "Gerenciar Pontos"
         '
-        'GerenciarListaToolStripMenuItem
+        'AppsÚteisToolStripMenuItem
         '
-        Me.GerenciarListaToolStripMenuItem.Name = "GerenciarListaToolStripMenuItem"
-        Me.GerenciarListaToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.B), System.Windows.Forms.Keys)
-        Me.GerenciarListaToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.GerenciarListaToolStripMenuItem.Text = "Gerenciar Lista"
+        Me.AppsÚteisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculadoraDeHorasToolStripMenuItem})
+        Me.AppsÚteisToolStripMenuItem.Name = "AppsÚteisToolStripMenuItem"
+        Me.AppsÚteisToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
+        Me.AppsÚteisToolStripMenuItem.Text = "&Apps Úteis"
+        '
+        'CalculadoraDeHorasToolStripMenuItem
+        '
+        Me.CalculadoraDeHorasToolStripMenuItem.Name = "CalculadoraDeHorasToolStripMenuItem"
+        Me.CalculadoraDeHorasToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.CalculadoraDeHorasToolStripMenuItem.Text = "Calculadora De Horas"
+        '
+        'EncerrarToolStripMenuItem
+        '
+        Me.EncerrarToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.EncerrarToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.EncerrarToolStripMenuItem.Name = "EncerrarToolStripMenuItem"
+        Me.EncerrarToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.EncerrarToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.EncerrarToolStripMenuItem.Text = "&Encerrar"
         '
         'frm_menu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ClientSize = New System.Drawing.Size(933, 450)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.DoubleBuffered = True
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frm_menu"
-        Me.Text = "MENU PRINCIPAL"
+        Me.Text = "PONTO OFFLINE"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
@@ -143,15 +138,14 @@ Partial Class frm_menu
     End Sub
 
     Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents GereciamentoDeClientesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CadastrosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CadastroToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AplicativosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GerenciamentoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WindowsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CalculadoraToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExcelToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BlocoDeNotasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EncerrarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SairDoProgramaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BatchToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GerenciarListaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FuncionáriosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HoráriosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AppsÚteisToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CalculadoraDeHorasToolStripMenuItem As ToolStripMenuItem
 End Class
