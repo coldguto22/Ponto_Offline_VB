@@ -53,6 +53,17 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-BNHPJH3\SQLEXPRESS;Initial Catalog=PontoOfflineVB;Integrated "& _ 
+            "Security=True;Encrypt=True;TrustServerCertificate=True")>  _
+        Public ReadOnly Property PontoOfflineVBConnectionString() As String
+            Get
+                Return CType(Me("PontoOfflineVBConnectionString"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

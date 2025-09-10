@@ -1,29 +1,14 @@
 ﻿Public Class frm_funcionario
     Private Sub frm_funcionarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Carregar_funcionarios()
+        'TODO: This line of code loads data into the 'PontoOfflineVBDataSet.tb_funcionarios' table. You can move, or remove it, as needed.
+        Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet.tb_funcionarios)
     End Sub
 
     Private Sub btn_novo_Click(sender As Object, e As EventArgs) Handles btn_novo.Click
         cad_funcionario.ShowDialog()
-        Carregar_funcionarios() ' Atualiza a lista após cadastro
     End Sub
 
-    Sub Carregar_funcionarios()
-        Try
-            dgv_funcionarios.Rows.Clear()
-            sql = "SELECT * FROM tb_funcionarios ORDER BY nome ASC"
-            rs = db.Execute(sql)
-            Do While rs.EOF = False
-                dgv_funcionarios.Rows.Add(
-                    rs.Fields("cpf").Value,
-                    rs.Fields("nome").Value,
-                    rs.Fields("cargo").Value,
-                    rs.Fields("empresa").Value
-                )
-                rs.MoveNext()
-            Loop
-        Catch ex As Exception
-            MsgBox("Erro ao carregar funcionários!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
-        End Try
+    Private Sub dgv_funcionarios_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_funcionarios.CellContentClick
+
     End Sub
 End Class

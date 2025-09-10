@@ -25,9 +25,9 @@ Partial Class frm_menu
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_menu))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.CadastrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CadastroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HoráriosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FuncionáriosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmpresaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HorárioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FuncionárioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciamentoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BatchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -50,29 +50,29 @@ Partial Class frm_menu
         '
         'CadastrosToolStripMenuItem
         '
-        Me.CadastrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CadastroToolStripMenuItem, Me.HoráriosToolStripMenuItem, Me.FuncionáriosToolStripMenuItem})
+        Me.CadastrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpresaToolStripMenuItem, Me.HorárioToolStripMenuItem, Me.FuncionárioToolStripMenuItem})
         Me.CadastrosToolStripMenuItem.Name = "CadastrosToolStripMenuItem"
         Me.CadastrosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
         Me.CadastrosToolStripMenuItem.Text = "&Cadastros"
         '
-        'CadastroToolStripMenuItem
+        'EmpresaToolStripMenuItem
         '
-        Me.CadastroToolStripMenuItem.Image = CType(resources.GetObject("CadastroToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.CadastroToolStripMenuItem.Name = "CadastroToolStripMenuItem"
-        Me.CadastroToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.CadastroToolStripMenuItem.Text = "Empresa"
+        Me.EmpresaToolStripMenuItem.Image = CType(resources.GetObject("EmpresaToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.EmpresaToolStripMenuItem.Name = "EmpresaToolStripMenuItem"
+        Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.EmpresaToolStripMenuItem.Text = "Empresa"
         '
-        'HoráriosToolStripMenuItem
+        'HorárioToolStripMenuItem
         '
-        Me.HoráriosToolStripMenuItem.Name = "HoráriosToolStripMenuItem"
-        Me.HoráriosToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.HoráriosToolStripMenuItem.Text = "Horários"
+        Me.HorárioToolStripMenuItem.Name = "HorárioToolStripMenuItem"
+        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HorárioToolStripMenuItem.Text = "Horário"
         '
-        'FuncionáriosToolStripMenuItem
+        'FuncionárioToolStripMenuItem
         '
-        Me.FuncionáriosToolStripMenuItem.Name = "FuncionáriosToolStripMenuItem"
-        Me.FuncionáriosToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.FuncionáriosToolStripMenuItem.Text = "Funcionários"
+        Me.FuncionárioToolStripMenuItem.Name = "FuncionárioToolStripMenuItem"
+        Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FuncionárioToolStripMenuItem.Text = "Funcionário"
         '
         'GerenciamentoToolStripMenuItem
         '
@@ -139,13 +139,13 @@ Partial Class frm_menu
 
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents CadastrosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CadastroToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EmpresaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GerenciamentoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WindowsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EncerrarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BatchToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FuncionáriosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents HoráriosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FuncionárioToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HorárioToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AppsÚteisToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CalculadoraDeHorasToolStripMenuItem As ToolStripMenuItem
 End Class

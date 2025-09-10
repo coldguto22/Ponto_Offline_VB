@@ -9,4 +9,5 @@
     Private Sub frm_menu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
 End Class
