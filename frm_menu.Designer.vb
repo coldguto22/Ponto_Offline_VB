@@ -39,12 +39,12 @@ Partial Class frm_menu
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CadastrosToolStripMenuItem, Me.GerenciamentoToolStripMenuItem, Me.AppsÚteisToolStripMenuItem, Me.EncerrarToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(933, 24)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1066, 25)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -52,58 +52,58 @@ Partial Class frm_menu
         '
         Me.CadastrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpresaToolStripMenuItem, Me.HorárioToolStripMenuItem, Me.FuncionárioToolStripMenuItem})
         Me.CadastrosToolStripMenuItem.Name = "CadastrosToolStripMenuItem"
-        Me.CadastrosToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
+        Me.CadastrosToolStripMenuItem.Size = New System.Drawing.Size(79, 21)
         Me.CadastrosToolStripMenuItem.Text = "&Cadastros"
         '
         'EmpresaToolStripMenuItem
         '
         Me.EmpresaToolStripMenuItem.Image = CType(resources.GetObject("EmpresaToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EmpresaToolStripMenuItem.Name = "EmpresaToolStripMenuItem"
-        Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.EmpresaToolStripMenuItem.Text = "Empresa"
         '
         'HorárioToolStripMenuItem
         '
         Me.HorárioToolStripMenuItem.Name = "HorárioToolStripMenuItem"
-        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.HorárioToolStripMenuItem.Text = "Horário"
         '
         'FuncionárioToolStripMenuItem
         '
         Me.FuncionárioToolStripMenuItem.Name = "FuncionárioToolStripMenuItem"
-        Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.FuncionárioToolStripMenuItem.Text = "Funcionário"
         '
         'GerenciamentoToolStripMenuItem
         '
         Me.GerenciamentoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WindowsToolStripMenuItem, Me.BatchToolStripMenuItem})
         Me.GerenciamentoToolStripMenuItem.Name = "GerenciamentoToolStripMenuItem"
-        Me.GerenciamentoToolStripMenuItem.Size = New System.Drawing.Size(106, 20)
+        Me.GerenciamentoToolStripMenuItem.Size = New System.Drawing.Size(108, 21)
         Me.GerenciamentoToolStripMenuItem.Text = "&Gerenciamento"
         '
         'WindowsToolStripMenuItem
         '
         Me.WindowsToolStripMenuItem.Name = "WindowsToolStripMenuItem"
-        Me.WindowsToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.WindowsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.WindowsToolStripMenuItem.Text = "Importar Batidas"
         '
         'BatchToolStripMenuItem
         '
         Me.BatchToolStripMenuItem.Name = "BatchToolStripMenuItem"
-        Me.BatchToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.BatchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.BatchToolStripMenuItem.Text = "Gerenciar Pontos"
         '
         'AppsÚteisToolStripMenuItem
         '
         Me.AppsÚteisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculadoraDeHorasToolStripMenuItem})
         Me.AppsÚteisToolStripMenuItem.Name = "AppsÚteisToolStripMenuItem"
-        Me.AppsÚteisToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
+        Me.AppsÚteisToolStripMenuItem.Size = New System.Drawing.Size(83, 21)
         Me.AppsÚteisToolStripMenuItem.Text = "&Apps Úteis"
         '
         'CalculadoraDeHorasToolStripMenuItem
         '
         Me.CalculadoraDeHorasToolStripMenuItem.Name = "CalculadoraDeHorasToolStripMenuItem"
-        Me.CalculadoraDeHorasToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.CalculadoraDeHorasToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.CalculadoraDeHorasToolStripMenuItem.Text = "Calculadora De Horas"
         '
         'EncerrarToolStripMenuItem
@@ -112,21 +112,21 @@ Partial Class frm_menu
         Me.EncerrarToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText
         Me.EncerrarToolStripMenuItem.Name = "EncerrarToolStripMenuItem"
         Me.EncerrarToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.EncerrarToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.EncerrarToolStripMenuItem.Size = New System.Drawing.Size(69, 21)
         Me.EncerrarToolStripMenuItem.Text = "&Encerrar"
         '
         'frm_menu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(933, 450)
+        Me.ClientSize = New System.Drawing.Size(1066, 554)
         Me.Controls.Add(Me.MenuStrip1)
         Me.DoubleBuffered = True
-        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.Name = "frm_menu"
         Me.Text = "PONTO OFFLINE"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

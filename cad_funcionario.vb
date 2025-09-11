@@ -1,15 +1,32 @@
-﻿Public Class cad_funcionario
+﻿Imports System.IO
+
+Public Class cad_funcionario
+    ' No cad_funcionario.vb
     Private Sub Img_foto_Click(sender As Object, e As EventArgs) Handles img_foto.Click
         Try
             With OpenFileDialog1
                 .Title = "Selecione uma Foto"
-                .InitialDirectory = Application.StartupPath & "\Fotos\"
-                .ShowDialog()
-                diretorio = .FileName
-                img_foto.Load(diretorio)
+                .Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
+                .InitialDirectory = Path.Combine(Application.StartupPath, "Fotos")
+
+                If .ShowDialog() = DialogResult.OK Then
+                    ' Criar pasta se não existir
+                    Dim fotoDir As String = Path.Combine(Application.StartupPath, "Fotos")
+                    If Not Directory.Exists(fotoDir) Then
+                        Directory.CreateDirectory(fotoDir)
+                    End If
+
+                    ' Copiar arquivo para pasta local
+                    Dim nomeArquivo As String = $"{txt_cpf.Text.Replace(",", "").Replace(".", "").Replace("-", "")}_{Path.GetFileName(.FileName)}"
+                    Dim caminhoDestino As String = Path.Combine(fotoDir, nomeArquivo)
+
+                    File.Copy(.FileName, caminhoDestino, True)
+                    img_foto.Load(caminhoDestino)
+                    diretorio = caminhoDestino
+                End If
             End With
         Catch ex As Exception
-            Exit Sub
+            MessageBox.Show($"Erro ao carregar foto: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -42,17 +59,17 @@
                 Exit Sub
             End If
 
-            Dim cpf As String = SQLSafe(txt_cpf.Text)
-            Dim nome As String = SQLSafe(txt_nome.Text)
+            Dim cpf As String = txt_cpf.Text
+            Dim nome As String = txt_nome.Text
             Dim dataAdmissao As String = cmb_admissao.Value.ToString("yyyy-MM-dd")
             Dim dataNasc As String = cmb_nasc.Value.ToString("yyyy-MM-dd")
-            Dim pis As String = SQLSafe(txt_pis.Text)
-            Dim empresa As String = SQLSafe(cmb_empresa.Text)
-            Dim folha As String = SQLSafe(txt_folha.Text)
-            Dim cargo As String = SQLSafe(txt_cargo.Text)
-            Dim horario As String = SQLSafe(cmb_horario.Text)
+            Dim pis As String = txt_pis.Text
+            Dim empresa As String = cmb_empresa.Text
+            Dim folha As String = txt_folha.Text
+            Dim cargo As String = txt_cargo.Text
+            Dim horario As String = cmb_horario.Text
             Dim dataDemissao As String = cmb_demissao.Value.ToString("yyyy-MM-dd")
-            Dim fotoPath As String = SQLSafe(diretorio)
+            Dim fotoPath As String = diretorio
 
             sql = "SELECT * FROM tb_funcionarios WHERE cpf='" & cpf & "'"
             rs = db.Execute(sql)
@@ -73,11 +90,33 @@
         End Try
     End Sub
 
-    ' Helper to escape single quotes for inline SQL usage.
-    Private Function SQLSafe(value As String) As String
-        If value Is Nothing Then Return ""
-        Return value.Replace("'", "''").Trim()
+    Private Function ValidarCampos() As Boolean
+        Dim erros As New List(Of String)
+
+        If String.IsNullOrWhiteSpace(txt_cpf.Text) Then
+            erros.Add("CPF é obrigatório")
+        ElseIf Not ValidarCPF(txt_cpf.Text) Then
+            erros.Add("CPF inválido")
+        End If
+
+        If String.IsNullOrWhiteSpace(txt_nome.Text) Then
+            erros.Add("Nome é obrigatório")
+        End If
+
+        If erros.Count > 0 Then
+            MessageBox.Show(String.Join(Environment.NewLine, erros), "Campos Obrigatórios", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        Return True
     End Function
+
+    Private Function ValidarCPF(cpf As String) As Boolean
+        ' Implementar validação real de CPF
+        cpf = cpf.Replace(".", "").Replace("-", "").Replace(",", "")
+        Return cpf.Length = 11 AndAlso IsNumeric(cpf)
+    End Function
+
 
     Private Sub txt_cpf_LostFocus(sender As Object, e As EventArgs) Handles txt_cpf.LostFocus
         Try
