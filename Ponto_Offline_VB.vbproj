@@ -144,6 +144,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PontoOfflineVBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="PontoOfflineVBDataSet.vb">
+      <DependentUpon>PontoOfflineVBDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="cad_funcionario.resx">

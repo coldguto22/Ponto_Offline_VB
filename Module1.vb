@@ -22,24 +22,6 @@
     '    End Try
     'End Sub
 
-    ' Carregar dados da tabela de clientes (comentado pois o controle pode não existir)
-    'Sub Carregar_dados()
-    '    Try
-    '        With Form1.dgv_dados
-    '            sql = $"select * from tb_clientes order by nome asc"
-    '            rs = db.Execute(sql)
-    '            cont = 0
-    '            .Rows.Clear()
-    '            Do While rs.EOF = False
-    '                cont = cont + 1
-    '                .Rows.Add(cont, rs.Fields(1).Value, rs.Fields(2).Value, Nothing, Nothing)
-    '                rs.MoveNext()
-    '            Loop
-    '        End With
-    '    Catch ex As Exception
-    '        Exit Sub
-    '    End Try
-    'End Sub
 
     ' Nova rotina para carregar funcionários (usa o mesmo DataGridView do Form1)
     'Sub Carregar_funcionarios()
