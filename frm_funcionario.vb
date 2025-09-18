@@ -20,6 +20,8 @@
 
     ' Adicionar este método no Form_Load para carregar inicialmente
     Private Sub frm_funcionarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'PontoOfflineVBDataSet1.tb_funcionarios' table. You can move, or remove it, as needed.
+        Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet1.tb_funcionarios)
         Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet.tb_funcionarios)
         AtualizarGrid() ' Chama para definir o título com contador
     End Sub

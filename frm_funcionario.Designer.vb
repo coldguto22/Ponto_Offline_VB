@@ -24,69 +24,43 @@ Partial Class frm_funcionario
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.dgv_funcionarios = New System.Windows.Forms.DataGridView()
-        Me.FolhaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NomeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CpfDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PisDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TbfuncionariosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PontoOfflineVBDataSet = New Ponto_Offline_VB.PontoOfflineVBDataSet()
         Me.btn_novo = New System.Windows.Forms.Button()
         Me.Tb_funcionariosTableAdapter = New Ponto_Offline_VB.PontoOfflineVBDataSetTableAdapters.tb_funcionariosTableAdapter()
+        Me.PontoOfflineVBDataSet1 = New Ponto_Offline_VB.PontoOfflineVBDataSet()
+        Me.PontoOfflineVBDataSet1BindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TbfuncionariosBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CpfDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NomeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataadmissaoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PisDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FolhaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CargoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HorarioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DatademissaoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FotoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DatanascDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv_funcionarios, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TbfuncionariosBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PontoOfflineVBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PontoOfflineVBDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PontoOfflineVBDataSet1BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TbfuncionariosBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgv_funcionarios
         '
         Me.dgv_funcionarios.AutoGenerateColumns = False
         Me.dgv_funcionarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_funcionarios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FolhaDataGridViewTextBoxColumn, Me.NomeDataGridViewTextBoxColumn, Me.CpfDataGridViewTextBoxColumn, Me.PisDataGridViewTextBoxColumn, Me.EmpresaDataGridViewTextBoxColumn})
-        Me.dgv_funcionarios.DataSource = Me.TbfuncionariosBindingSource
+        Me.dgv_funcionarios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CpfDataGridViewTextBoxColumn, Me.NomeDataGridViewTextBoxColumn, Me.DataadmissaoDataGridViewTextBoxColumn, Me.PisDataGridViewTextBoxColumn, Me.EmpresaDataGridViewTextBoxColumn, Me.FolhaDataGridViewTextBoxColumn, Me.CargoDataGridViewTextBoxColumn, Me.HorarioDataGridViewTextBoxColumn, Me.DatademissaoDataGridViewTextBoxColumn, Me.FotoDataGridViewTextBoxColumn, Me.DatanascDataGridViewTextBoxColumn})
+        Me.dgv_funcionarios.DataSource = Me.TbfuncionariosBindingSource1
         Me.dgv_funcionarios.Location = New System.Drawing.Point(199, 13)
         Me.dgv_funcionarios.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.dgv_funcionarios.Name = "dgv_funcionarios"
         Me.dgv_funcionarios.Size = New System.Drawing.Size(880, 486)
         Me.dgv_funcionarios.TabIndex = 0
-        '
-        'FolhaDataGridViewTextBoxColumn
-        '
-        Me.FolhaDataGridViewTextBoxColumn.DataPropertyName = "folha"
-        Me.FolhaDataGridViewTextBoxColumn.HeaderText = "Nº Folha"
-        Me.FolhaDataGridViewTextBoxColumn.Name = "FolhaDataGridViewTextBoxColumn"
-        Me.FolhaDataGridViewTextBoxColumn.ReadOnly = True
-        Me.FolhaDataGridViewTextBoxColumn.Width = 70
-        '
-        'NomeDataGridViewTextBoxColumn
-        '
-        Me.NomeDataGridViewTextBoxColumn.DataPropertyName = "nome"
-        Me.NomeDataGridViewTextBoxColumn.HeaderText = "Nome"
-        Me.NomeDataGridViewTextBoxColumn.Name = "NomeDataGridViewTextBoxColumn"
-        Me.NomeDataGridViewTextBoxColumn.ReadOnly = True
-        Me.NomeDataGridViewTextBoxColumn.Width = 250
-        '
-        'CpfDataGridViewTextBoxColumn
-        '
-        Me.CpfDataGridViewTextBoxColumn.DataPropertyName = "cpf"
-        Me.CpfDataGridViewTextBoxColumn.HeaderText = "CPF"
-        Me.CpfDataGridViewTextBoxColumn.Name = "CpfDataGridViewTextBoxColumn"
-        Me.CpfDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'PisDataGridViewTextBoxColumn
-        '
-        Me.PisDataGridViewTextBoxColumn.DataPropertyName = "pis"
-        Me.PisDataGridViewTextBoxColumn.HeaderText = "PIS"
-        Me.PisDataGridViewTextBoxColumn.Name = "PisDataGridViewTextBoxColumn"
-        Me.PisDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'EmpresaDataGridViewTextBoxColumn
-        '
-        Me.EmpresaDataGridViewTextBoxColumn.DataPropertyName = "empresa"
-        Me.EmpresaDataGridViewTextBoxColumn.HeaderText = "Empresa"
-        Me.EmpresaDataGridViewTextBoxColumn.Name = "EmpresaDataGridViewTextBoxColumn"
-        Me.EmpresaDataGridViewTextBoxColumn.ReadOnly = True
-        Me.EmpresaDataGridViewTextBoxColumn.Width = 250
         '
         'TbfuncionariosBindingSource
         '
@@ -115,6 +89,87 @@ Partial Class frm_funcionario
         '
         Me.Tb_funcionariosTableAdapter.ClearBeforeFill = True
         '
+        'PontoOfflineVBDataSet1
+        '
+        Me.PontoOfflineVBDataSet1.DataSetName = "PontoOfflineVBDataSet"
+        Me.PontoOfflineVBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'PontoOfflineVBDataSet1BindingSource
+        '
+        Me.PontoOfflineVBDataSet1BindingSource.DataSource = Me.PontoOfflineVBDataSet1
+        Me.PontoOfflineVBDataSet1BindingSource.Position = 0
+        '
+        'TbfuncionariosBindingSource1
+        '
+        Me.TbfuncionariosBindingSource1.DataMember = "tb_funcionarios"
+        Me.TbfuncionariosBindingSource1.DataSource = Me.PontoOfflineVBDataSet1BindingSource
+        '
+        'CpfDataGridViewTextBoxColumn
+        '
+        Me.CpfDataGridViewTextBoxColumn.DataPropertyName = "cpf"
+        Me.CpfDataGridViewTextBoxColumn.HeaderText = "cpf"
+        Me.CpfDataGridViewTextBoxColumn.Name = "CpfDataGridViewTextBoxColumn"
+        '
+        'NomeDataGridViewTextBoxColumn
+        '
+        Me.NomeDataGridViewTextBoxColumn.DataPropertyName = "nome"
+        Me.NomeDataGridViewTextBoxColumn.HeaderText = "nome"
+        Me.NomeDataGridViewTextBoxColumn.Name = "NomeDataGridViewTextBoxColumn"
+        '
+        'DataadmissaoDataGridViewTextBoxColumn
+        '
+        Me.DataadmissaoDataGridViewTextBoxColumn.DataPropertyName = "data_admissao"
+        Me.DataadmissaoDataGridViewTextBoxColumn.HeaderText = "data_admissao"
+        Me.DataadmissaoDataGridViewTextBoxColumn.Name = "DataadmissaoDataGridViewTextBoxColumn"
+        '
+        'PisDataGridViewTextBoxColumn
+        '
+        Me.PisDataGridViewTextBoxColumn.DataPropertyName = "pis"
+        Me.PisDataGridViewTextBoxColumn.HeaderText = "pis"
+        Me.PisDataGridViewTextBoxColumn.Name = "PisDataGridViewTextBoxColumn"
+        '
+        'EmpresaDataGridViewTextBoxColumn
+        '
+        Me.EmpresaDataGridViewTextBoxColumn.DataPropertyName = "empresa"
+        Me.EmpresaDataGridViewTextBoxColumn.HeaderText = "empresa"
+        Me.EmpresaDataGridViewTextBoxColumn.Name = "EmpresaDataGridViewTextBoxColumn"
+        '
+        'FolhaDataGridViewTextBoxColumn
+        '
+        Me.FolhaDataGridViewTextBoxColumn.DataPropertyName = "folha"
+        Me.FolhaDataGridViewTextBoxColumn.HeaderText = "folha"
+        Me.FolhaDataGridViewTextBoxColumn.Name = "FolhaDataGridViewTextBoxColumn"
+        '
+        'CargoDataGridViewTextBoxColumn
+        '
+        Me.CargoDataGridViewTextBoxColumn.DataPropertyName = "cargo"
+        Me.CargoDataGridViewTextBoxColumn.HeaderText = "cargo"
+        Me.CargoDataGridViewTextBoxColumn.Name = "CargoDataGridViewTextBoxColumn"
+        '
+        'HorarioDataGridViewTextBoxColumn
+        '
+        Me.HorarioDataGridViewTextBoxColumn.DataPropertyName = "horario"
+        Me.HorarioDataGridViewTextBoxColumn.HeaderText = "horario"
+        Me.HorarioDataGridViewTextBoxColumn.Name = "HorarioDataGridViewTextBoxColumn"
+        '
+        'DatademissaoDataGridViewTextBoxColumn
+        '
+        Me.DatademissaoDataGridViewTextBoxColumn.DataPropertyName = "data_demissao"
+        Me.DatademissaoDataGridViewTextBoxColumn.HeaderText = "data_demissao"
+        Me.DatademissaoDataGridViewTextBoxColumn.Name = "DatademissaoDataGridViewTextBoxColumn"
+        '
+        'FotoDataGridViewTextBoxColumn
+        '
+        Me.FotoDataGridViewTextBoxColumn.DataPropertyName = "foto"
+        Me.FotoDataGridViewTextBoxColumn.HeaderText = "foto"
+        Me.FotoDataGridViewTextBoxColumn.Name = "FotoDataGridViewTextBoxColumn"
+        '
+        'DatanascDataGridViewTextBoxColumn
+        '
+        Me.DatanascDataGridViewTextBoxColumn.DataPropertyName = "data_nasc"
+        Me.DatanascDataGridViewTextBoxColumn.HeaderText = "data_nasc"
+        Me.DatanascDataGridViewTextBoxColumn.Name = "DatanascDataGridViewTextBoxColumn"
+        '
         'frm_funcionario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -129,6 +184,9 @@ Partial Class frm_funcionario
         CType(Me.dgv_funcionarios, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TbfuncionariosBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PontoOfflineVBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PontoOfflineVBDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PontoOfflineVBDataSet1BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TbfuncionariosBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -138,9 +196,18 @@ Partial Class frm_funcionario
     Friend WithEvents PontoOfflineVBDataSet As PontoOfflineVBDataSet
     Friend WithEvents TbfuncionariosBindingSource As BindingSource
     Friend WithEvents Tb_funcionariosTableAdapter As PontoOfflineVBDataSetTableAdapters.tb_funcionariosTableAdapter
-    Friend WithEvents FolhaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NomeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PontoOfflineVBDataSet1BindingSource As BindingSource
+    Friend WithEvents PontoOfflineVBDataSet1 As PontoOfflineVBDataSet
+    Friend WithEvents TbfuncionariosBindingSource1 As BindingSource
     Friend WithEvents CpfDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NomeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataadmissaoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents PisDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents EmpresaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FolhaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CargoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents HorarioDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DatademissaoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FotoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DatanascDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class
