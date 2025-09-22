@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 
-Public Class cad_funcionario
+Public Class Cad_funcionario
     ' No cad_funcionario.vb
     Private Sub Img_foto_Click(sender As Object, e As EventArgs) Handles img_foto.Click
         Try
@@ -32,6 +32,18 @@ Public Class cad_funcionario
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Conecta_banco()
+        ' Preencher cmb_empresa com razões sociais das empresas cadastradas
+        Try
+            cmb_empresa.Items.Clear()
+            sql = "SELECT razao_social FROM tb_empresas"
+            rs = db.Execute(sql)
+            While Not rs.EOF
+                cmb_empresa.Items.Add(rs.Fields("razao_social").Value)
+                rs.MoveNext()
+            End While
+        Catch ex As Exception
+            MsgBox("Erro ao carregar empresas! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
         'Carregar_dados() 'Removido, método não existe mais
         'carregar_campos() 'Removido, método não existe mais
     End Sub
@@ -118,7 +130,7 @@ Public Class cad_funcionario
     End Function
 
 
-    Private Sub txt_cpf_LostFocus(sender As Object, e As EventArgs) Handles txt_cpf.LostFocus
+    Private Sub Txt_cpf_LostFocus(sender As Object, e As EventArgs) Handles txt_cpf.LostFocus
         Try
             sql = $"select * from tb_funcionarios where cpf='{txt_cpf.Text}'"
             rs = db.Execute(sql)
@@ -141,8 +153,11 @@ Public Class cad_funcionario
         End Try
     End Sub
 
-    Private Sub txt_cpf_DoubleClick(sender As Object, e As EventArgs) Handles txt_cpf.DoubleClick
+    Private Sub Txt_cpf_DoubleClick(sender As Object, e As EventArgs) Handles txt_cpf.DoubleClick
         Limpar_cadastro()
     End Sub
 
+    Private Sub Cmb_empresa_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_empresa.SelectedIndexChanged
+
+    End Sub
 End Class

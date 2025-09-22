@@ -59,19 +59,21 @@ Partial Class frm_menu
         '
         Me.EmpresaToolStripMenuItem.Image = CType(resources.GetObject("EmpresaToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EmpresaToolStripMenuItem.Name = "EmpresaToolStripMenuItem"
-        Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.EmpresaToolStripMenuItem.Text = "Empresa"
         '
         'HorárioToolStripMenuItem
         '
+        Me.HorárioToolStripMenuItem.Image = CType(resources.GetObject("HorárioToolStripMenuItem.Image"), System.Drawing.Image)
         Me.HorárioToolStripMenuItem.Name = "HorárioToolStripMenuItem"
-        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.HorárioToolStripMenuItem.Text = "Horário"
         '
         'FuncionárioToolStripMenuItem
         '
+        Me.FuncionárioToolStripMenuItem.Image = CType(resources.GetObject("FuncionárioToolStripMenuItem.Image"), System.Drawing.Image)
         Me.FuncionárioToolStripMenuItem.Name = "FuncionárioToolStripMenuItem"
-        Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.FuncionárioToolStripMenuItem.Text = "Funcionário"
         '
         'GerenciamentoToolStripMenuItem
@@ -125,6 +127,7 @@ Partial Class frm_menu
         Me.Controls.Add(Me.MenuStrip1)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.Name = "frm_menu"

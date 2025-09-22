@@ -158,6 +158,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="cad_empresa.resx">
+      <DependentUpon>cad_empresa.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cad_funcionario.resx">
       <DependentUpon>cad_funcionario.vb</DependentUpon>
     </EmbeddedResource>

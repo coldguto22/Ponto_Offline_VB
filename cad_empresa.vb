@@ -35,7 +35,7 @@ Public Class cad_empresa
         End Try
     End Sub
 
-    Private Sub txt_cnpj_LostFocus(sender As Object, e As EventArgs) Handles txt_cnpj.LostFocus
+    Private Sub txt_cnpj_LostFocus(sender As Object, e As EventArgs)
         Try
             sql = $"select * from tb_empresas where cnpj='{txt_cnpj.Text}'"
             rs = db.Execute(sql)
@@ -54,7 +54,11 @@ Public Class cad_empresa
         End Try
     End Sub
 
-    Private Sub txt_cnpj_DoubleClick(sender As Object, e As EventArgs) Handles txt_cnpj.DoubleClick
+    Private Sub txt_cnpj_DoubleClick(sender As Object, e As EventArgs)
         Limpar_cadastro()
+    End Sub
+
+    Private Sub txt_cnpj_TextChanged(sender As Object, e As EventArgs)
+
     End Sub
 End Class
