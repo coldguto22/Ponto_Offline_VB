@@ -27,7 +27,6 @@ Partial Class cad_empresa
         Me.txt_fantasia = New System.Windows.Forms.TextBox()
         Me.txt_insc = New System.Windows.Forms.TextBox()
         Me.txt_endereco = New System.Windows.Forms.TextBox()
-        Me.txt_telefone = New System.Windows.Forms.TextBox()
         Me.txt_email = New System.Windows.Forms.TextBox()
         Me.lbl_cnpj = New System.Windows.Forms.Label()
         Me.lbl_razao = New System.Windows.Forms.Label()
@@ -38,6 +37,9 @@ Partial Class cad_empresa
         Me.lbl_email = New System.Windows.Forms.Label()
         Me.btn_concluir = New System.Windows.Forms.Button()
         Me.txt_cnpj = New System.Windows.Forms.MaskedTextBox()
+        Me.txt_telefone = New System.Windows.Forms.MaskedTextBox()
+        Me.img_logo = New System.Windows.Forms.PictureBox()
+        CType(Me.img_logo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txt_razao
@@ -69,16 +71,8 @@ Partial Class cad_empresa
         Me.txt_endereco.Location = New System.Drawing.Point(160, 166)
         Me.txt_endereco.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_endereco.Name = "txt_endereco"
-        Me.txt_endereco.Size = New System.Drawing.Size(532, 22)
+        Me.txt_endereco.Size = New System.Drawing.Size(399, 22)
         Me.txt_endereco.TabIndex = 4
-        '
-        'txt_telefone
-        '
-        Me.txt_telefone.Location = New System.Drawing.Point(160, 203)
-        Me.txt_telefone.Margin = New System.Windows.Forms.Padding(4)
-        Me.txt_telefone.Name = "txt_telefone"
-        Me.txt_telefone.Size = New System.Drawing.Size(265, 22)
-        Me.txt_telefone.TabIndex = 5
         '
         'txt_email
         '
@@ -176,11 +170,33 @@ Partial Class cad_empresa
         Me.txt_cnpj.Size = New System.Drawing.Size(121, 22)
         Me.txt_cnpj.TabIndex = 15
         '
+        'txt_telefone
+        '
+        Me.txt_telefone.Location = New System.Drawing.Point(160, 206)
+        Me.txt_telefone.Mask = "(99) 99999-9999"
+        Me.txt_telefone.Name = "txt_telefone"
+        Me.txt_telefone.Size = New System.Drawing.Size(101, 22)
+        Me.txt_telefone.TabIndex = 16
+        '
+        'img_logo
+        '
+        Me.img_logo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.img_logo.Image = CType(resources.GetObject("img_logo.Image"), System.Drawing.Image)
+        Me.img_logo.Location = New System.Drawing.Point(637, 22)
+        Me.img_logo.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.img_logo.Name = "img_logo"
+        Me.img_logo.Size = New System.Drawing.Size(203, 243)
+        Me.img_logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.img_logo.TabIndex = 17
+        Me.img_logo.TabStop = False
+        '
         'cad_empresa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(779, 346)
+        Me.ClientSize = New System.Drawing.Size(873, 375)
+        Me.Controls.Add(Me.img_logo)
+        Me.Controls.Add(Me.txt_telefone)
         Me.Controls.Add(Me.txt_cnpj)
         Me.Controls.Add(Me.btn_concluir)
         Me.Controls.Add(Me.lbl_email)
@@ -191,7 +207,6 @@ Partial Class cad_empresa
         Me.Controls.Add(Me.lbl_razao)
         Me.Controls.Add(Me.lbl_cnpj)
         Me.Controls.Add(Me.txt_email)
-        Me.Controls.Add(Me.txt_telefone)
         Me.Controls.Add(Me.txt_endereco)
         Me.Controls.Add(Me.txt_insc)
         Me.Controls.Add(Me.txt_fantasia)
@@ -201,15 +216,16 @@ Partial Class cad_empresa
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "cad_empresa"
         Me.Text = "Cadastro de Empresa"
+        CType(Me.img_logo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
+
     Friend WithEvents txt_razao As TextBox
     Friend WithEvents txt_fantasia As TextBox
     Friend WithEvents txt_insc As TextBox
     Friend WithEvents txt_endereco As TextBox
-    Friend WithEvents txt_telefone As TextBox
     Friend WithEvents txt_email As TextBox
     Friend WithEvents lbl_cnpj As Label
     Friend WithEvents lbl_razao As Label
@@ -220,4 +236,6 @@ Partial Class cad_empresa
     Friend WithEvents lbl_email As Label
     Friend WithEvents btn_concluir As Button
     Friend WithEvents txt_cnpj As MaskedTextBox
+    Friend WithEvents txt_telefone As MaskedTextBox
+    Friend WithEvents img_logo As PictureBox
 End Class
