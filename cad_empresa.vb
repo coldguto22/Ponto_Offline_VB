@@ -61,4 +61,19 @@ Public Class cad_empresa
     Private Sub txt_cnpj_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
+
+    Public Sub Limpar_cadastro()
+        Try
+            txt_cnpj.Clear()
+            txt_razao.Clear()
+            txt_fantasia.Clear()
+            txt_insc.Clear()
+            txt_endereco.Clear()
+            txt_telefone.Clear()
+            txt_email.Clear()
+            txt_cnpj.Focus()
+        Catch ex As Exception
+            Exit Sub
+        End Try
+    End Sub
 End Class

@@ -94,7 +94,7 @@ Partial Class cad_empresa
         Me.lbl_cnpj.Location = New System.Drawing.Point(27, 22)
         Me.lbl_cnpj.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_cnpj.Name = "lbl_cnpj"
-        Me.lbl_cnpj.Size = New System.Drawing.Size(42, 16)
+        Me.lbl_cnpj.Size = New System.Drawing.Size(43, 16)
         Me.lbl_cnpj.TabIndex = 7
         Me.lbl_cnpj.Text = "CNPJ"
         '
@@ -104,7 +104,7 @@ Partial Class cad_empresa
         Me.lbl_razao.Location = New System.Drawing.Point(27, 59)
         Me.lbl_razao.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_razao.Name = "lbl_razao"
-        Me.lbl_razao.Size = New System.Drawing.Size(88, 16)
+        Me.lbl_razao.Size = New System.Drawing.Size(89, 16)
         Me.lbl_razao.TabIndex = 8
         Me.lbl_razao.Text = "Razão Social"
         '
@@ -114,7 +114,7 @@ Partial Class cad_empresa
         Me.lbl_fantasia.Location = New System.Drawing.Point(27, 96)
         Me.lbl_fantasia.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_fantasia.Name = "lbl_fantasia"
-        Me.lbl_fantasia.Size = New System.Drawing.Size(99, 16)
+        Me.lbl_fantasia.Size = New System.Drawing.Size(100, 16)
         Me.lbl_fantasia.TabIndex = 9
         Me.lbl_fantasia.Text = "Nome Fantasia"
         '
@@ -124,7 +124,7 @@ Partial Class cad_empresa
         Me.lbl_insc.Location = New System.Drawing.Point(27, 133)
         Me.lbl_insc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_insc.Name = "lbl_insc"
-        Me.lbl_insc.Size = New System.Drawing.Size(90, 16)
+        Me.lbl_insc.Size = New System.Drawing.Size(91, 16)
         Me.lbl_insc.TabIndex = 10
         Me.lbl_insc.Text = "Insc. Estadual"
         '
@@ -134,7 +134,7 @@ Partial Class cad_empresa
         Me.lbl_endereco.Location = New System.Drawing.Point(27, 170)
         Me.lbl_endereco.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_endereco.Name = "lbl_endereco"
-        Me.lbl_endereco.Size = New System.Drawing.Size(66, 16)
+        Me.lbl_endereco.Size = New System.Drawing.Size(67, 16)
         Me.lbl_endereco.TabIndex = 11
         Me.lbl_endereco.Text = "Endereço"
         '
@@ -144,7 +144,7 @@ Partial Class cad_empresa
         Me.lbl_telefone.Location = New System.Drawing.Point(27, 207)
         Me.lbl_telefone.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_telefone.Name = "lbl_telefone"
-        Me.lbl_telefone.Size = New System.Drawing.Size(61, 16)
+        Me.lbl_telefone.Size = New System.Drawing.Size(62, 16)
         Me.lbl_telefone.TabIndex = 12
         Me.lbl_telefone.Text = "Telefone"
         '
@@ -154,7 +154,7 @@ Partial Class cad_empresa
         Me.lbl_email.Location = New System.Drawing.Point(27, 244)
         Me.lbl_email.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_email.Name = "lbl_email"
-        Me.lbl_email.Size = New System.Drawing.Size(41, 16)
+        Me.lbl_email.Size = New System.Drawing.Size(42, 16)
         Me.lbl_email.TabIndex = 13
         Me.lbl_email.Text = "Email"
         '

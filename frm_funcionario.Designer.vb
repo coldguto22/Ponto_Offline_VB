@@ -31,6 +31,8 @@ Partial Class frm_funcionario
         Me.TbfuncionariosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PontoOfflineVBDataSet = New Ponto_Offline_VB.PontoOfflineVBDataSet()
         Me.btn_novo = New System.Windows.Forms.Button()
+        Me.btn_atualizar = New System.Windows.Forms.Button()
+        Me.btn_excluir = New System.Windows.Forms.Button()
         Me.Tb_funcionariosTableAdapter = New Ponto_Offline_VB.PontoOfflineVBDataSetTableAdapters.tb_funcionariosTableAdapter()
         Me.NomeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FolhaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -95,6 +97,32 @@ Partial Class frm_funcionario
         Me.btn_novo.Text = "ADICIONAR"
         Me.btn_novo.UseVisualStyleBackColor = False
         '
+        'btn_atualizar
+        '
+        Me.btn_atualizar.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.btn_atualizar.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.btn_atualizar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btn_atualizar.Location = New System.Drawing.Point(32, 55)
+        Me.btn_atualizar.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.btn_atualizar.Name = "btn_atualizar"
+        Me.btn_atualizar.Size = New System.Drawing.Size(134, 28)
+        Me.btn_atualizar.TabIndex = 28
+        Me.btn_atualizar.Text = "ATUALIZAR"
+        Me.btn_atualizar.UseVisualStyleBackColor = False
+        '
+        'btn_excluir
+        '
+        Me.btn_excluir.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.btn_excluir.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.btn_excluir.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btn_excluir.Location = New System.Drawing.Point(32, 97)
+        Me.btn_excluir.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.btn_excluir.Name = "btn_excluir"
+        Me.btn_excluir.Size = New System.Drawing.Size(134, 28)
+        Me.btn_excluir.TabIndex = 29
+        Me.btn_excluir.Text = "EXCLUIR"
+        Me.btn_excluir.UseVisualStyleBackColor = False
+        '
         'Tb_funcionariosTableAdapter
         '
         Me.Tb_funcionariosTableAdapter.ClearBeforeFill = True
@@ -137,6 +165,8 @@ Partial Class frm_funcionario
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1093, 554)
+        Me.Controls.Add(Me.btn_excluir)
+        Me.Controls.Add(Me.btn_atualizar)
         Me.Controls.Add(Me.btn_novo)
         Me.Controls.Add(Me.dgv_funcionarios)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -167,4 +197,6 @@ Partial Class frm_funcionario
     Friend WithEvents CpfDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents PisDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents EmpresaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents btn_atualizar As Button
+    Friend WithEvents btn_excluir As Button
 End Class

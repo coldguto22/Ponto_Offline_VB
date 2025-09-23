@@ -6,7 +6,7 @@
 
     Private Sub EmpresaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmpresaToolStripMenuItem.Click
         ' Abrir formulário de cadastro de empresas
-        frm_empresa.ShowDialog()
+        frm_empresa.Show()
     End Sub
 
     Private Sub HorárioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HorárioToolStripMenuItem.Click

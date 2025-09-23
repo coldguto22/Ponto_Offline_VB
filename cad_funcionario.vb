@@ -31,7 +31,6 @@ Public Class Cad_funcionario
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Conecta_banco()
         ' Preencher cmb_empresa com razões sociais das empresas cadastradas
         Try
             cmb_empresa.Items.Clear()
@@ -159,5 +158,49 @@ Public Class Cad_funcionario
 
     Private Sub Cmb_empresa_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_empresa.SelectedIndexChanged
 
+    End Sub
+
+    Public Sub PreencherPorCPF(cpf As String)
+        Try
+            txt_cpf.Text = cpf
+            ' Replicar lógica do Txt_cpf_LostFocus
+            sql = $"select * from tb_funcionarios where cpf='{cpf}'"
+            rs = db.Execute(sql)
+            If rs.EOF = False Then
+                txt_nome.Text = rs.Fields("nome").Value
+                cmb_admissao.Value = rs.Fields("data_admissao").Value
+                cmb_nasc.Value = rs.Fields("data_nasc").Value
+                txt_pis.Text = rs.Fields("pis").Value
+                cmb_empresa.Text = rs.Fields("empresa").Value
+                txt_folha.Text = rs.Fields("folha").Value
+                txt_cargo.Text = rs.Fields("cargo").Value
+                cmb_horario.Text = rs.Fields("horario").Value
+                cmb_demissao.Value = rs.Fields("data_demissao").Value
+                img_foto.Load(rs.Fields("foto").Value)
+            Else
+                txt_nome.Focus()
+            End If
+        Catch ex As Exception
+            MsgBox("Erro ao Consultar! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
+    End Sub
+
+    Public Sub Limpar_cadastro()
+        Try
+            txt_cpf.Clear()
+            txt_nome.Clear()
+            cmb_admissao.Value = Now
+            cmb_nasc.Value = Now
+            txt_pis.Clear()
+            cmb_empresa.Text = ""
+            txt_folha.Clear()
+            txt_cargo.Clear()
+            cmb_horario.Text = ""
+            cmb_demissao.Value = Now
+            img_foto.Load(Application.StartupPath & "\Fotos\nova_foto.png")
+            txt_cpf.Focus()
+        Catch ex As Exception
+            Exit Sub
+        End Try
     End Sub
 End Class
