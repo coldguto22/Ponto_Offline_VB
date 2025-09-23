@@ -34,77 +34,94 @@ Public Class Cad_funcionario
         ' Preencher cmb_empresa com razões sociais das empresas cadastradas
         Try
             cmb_empresa.Items.Clear()
-            sql = "SELECT razao_social FROM tb_empresas"
-            rs = db.Execute(sql)
-            While Not rs.EOF
-                cmb_empresa.Items.Add(rs.Fields("razao_social").Value)
-                rs.MoveNext()
-            End While
+
+            ' Usar a nova função segura
+            sql = "SELECT razao_social FROM tb_empresas ORDER BY razao_social"
+            rs = ExecutarConsulta(sql)
+
+            If Not rs Is Nothing Then
+                While Not rs.EOF
+                    cmb_empresa.Items.Add(rs.Fields("razao_social").Value)
+                    rs.MoveNext()
+                End While
+                LimparRecordset(rs)
+            End If
+
         Catch ex As Exception
             MsgBox("Erro ao carregar empresas! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
         End Try
-        'Carregar_dados() 'Removido, método não existe mais
-        'carregar_campos() 'Removido, método não existe mais
     End Sub
-
-    ' PSEUDOCODE / PLAN (detailed):
-    ' 1. Validate required fields (cpf at minimum). If missing, show message and exit.
-    ' 2. Sanitize input to avoid SQL syntax issues (escape single quotes).
-    ' 3. Query the database to see if a record with the given CPF already exists.
-    ' 4. If not found:
-    '    a. Build an INSERT statement including cpf, nome, data_nasc, fone, email, foto.
-    '    b. Format the date value in an invariant format (yyyy-MM-dd) for SQL.
-    '    c. Execute the INSERT on the existing db connection.
-    '    d. Optionally call carregar_voz and audio.speak, refresh grid/list and clear fields.
-    ' 5. If found: notify user that the client already exists and set focus to cpf.
-    ' 6. Handle exceptions: show an error message and do not crash.
-    ' 7. Provide a small helper SQLSafe to escape single quotes and handle Nulls.
-    '
-    ' IMPLEMENTATION: Sub linked to the button's Click event and helper function below.
 
     Private Sub Btn_concluir_Click(sender As Object, e As EventArgs) Handles btn_concluir.Click
         Try
-            If String.IsNullOrWhiteSpace(txt_cpf.Text) Then
-                MsgBox("Informe o CPF.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
-                txt_cpf.Focus()
+            If Not ValidarCampos() Then
                 Exit Sub
             End If
 
-            Dim cpf As String = txt_cpf.Text
-            Dim nome As String = txt_nome.Text
+            Dim cpf As String = txt_cpf.Text.Replace(".", "").Replace("-", "").Replace(",", "")
+            Dim nome As String = txt_nome.Text.Replace("'", "''") ' Escape aspas simples
             Dim dataAdmissao As String = cmb_admissao.Value.ToString("yyyy-MM-dd")
             Dim dataNasc As String = cmb_nasc.Value.ToString("yyyy-MM-dd")
             Dim pis As String = txt_pis.Text
-            Dim empresa As String = cmb_empresa.Text
+            Dim empresa As String = cmb_empresa.Text.Replace("'", "''")
             Dim folha As String = txt_folha.Text
-            Dim cargo As String = txt_cargo.Text
-            Dim horario As String = cmb_horario.Text
+            Dim cargo As String = txt_cargo.Text.Replace("'", "''")
+            Dim horario As String = cmb_horario.Text.Replace("'", "''")
             Dim dataDemissao As String = cmb_demissao.Value.ToString("yyyy-MM-dd")
-            Dim fotoPath As String = diretorio
+            Dim fotoPath As String = If(String.IsNullOrEmpty(diretorio), "", diretorio.Replace("'", "''"))
 
-            sql = "SELECT * FROM tb_funcionarios WHERE cpf='" & cpf & "'"
-            rs = db.Execute(sql)
+            ' Verificar se já existe
+            sql = "SELECT COUNT(*) as total FROM tb_funcionarios WHERE cpf='" & cpf & "'"
+            rs = ExecutarConsulta(sql)
 
-            If rs.EOF = True Then
-                sql = "INSERT INTO tb_funcionarios (cpf, nome, data_admissao, data_nasc, pis, empresa, folha, cargo, horario, data_demissao, foto) " &
-                      "VALUES ('" & cpf & "', '" & nome & "', '" & dataAdmissao & "', '" & dataNasc & "', '" & pis & "', '" & empresa & "', '" & folha & "', '" & cargo & "', '" & horario & "', '" & dataDemissao & "', '" & fotoPath & "')"
-                rs = db.Execute(UCase(sql))
-                'Carregar_funcionarios() 'Descomente se o DataGridView existir
-                Limpar_cadastro()
-            Else
-                MsgBox("Funcionário Já Cadastrado!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
-                txt_cpf.Focus()
+            If Not rs Is Nothing Then
+                Dim existe As Boolean = rs.Fields("total").Value > 0
+                LimparRecordset(rs)
+
+                If Not existe Then
+                    ' Inserir novo registro
+                    sql = "INSERT INTO tb_funcionarios (cpf, nome, data_admissao, data_nasc, pis, empresa, folha, cargo, horario, data_demissao, foto) " &
+                          "VALUES ('" & cpf & "', '" & nome & "', '" & dataAdmissao & "', '" & dataNasc & "', '" & pis & "', '" & empresa & "', '" & folha & "', '" & cargo & "', '" & horario & "', '" & dataDemissao & "', '" & fotoPath & "')"
+
+                    If ExecutarComando(sql) Then
+                        MsgBox("Funcionário cadastrado com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
+                        Limpar_cadastro()
+                    End If
+                Else
+                    ' Atualizar registro existente
+                    sql = "UPDATE tb_funcionarios SET " &
+                          "nome='" & nome & "', " &
+                          "data_admissao='" & dataAdmissao & "', " &
+                          "data_nasc='" & dataNasc & "', " &
+                          "pis='" & pis & "', " &
+                          "empresa='" & empresa & "', " &
+                          "folha='" & folha & "', " &
+                          "cargo='" & cargo & "', " &
+                          "horario='" & horario & "', " &
+                          "data_demissao='" & dataDemissao & "'"
+
+                    If Not String.IsNullOrEmpty(fotoPath) Then
+                        sql &= ", foto='" & fotoPath & "'"
+                    End If
+
+                    sql &= " WHERE cpf='" & cpf & "'"
+
+                    If ExecutarComando(sql) Then
+                        MsgBox("Funcionário atualizado com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
+                        Limpar_cadastro()
+                    End If
+                End If
             End If
 
         Catch ex As Exception
-            MsgBox("Erro ao Gravar! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+            MsgBox("Erro ao processar funcionário! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
         End Try
     End Sub
 
     Private Function ValidarCampos() As Boolean
         Dim erros As New List(Of String)
 
-        If String.IsNullOrWhiteSpace(txt_cpf.Text) Then
+        If String.IsNullOrWhiteSpace(txt_cpf.Text) OrElse txt_cpf.Text = ",,-" Then
             erros.Add("CPF é obrigatório")
         ElseIf Not ValidarCPF(txt_cpf.Text) Then
             erros.Add("CPF inválido")
@@ -112,6 +129,10 @@ Public Class Cad_funcionario
 
         If String.IsNullOrWhiteSpace(txt_nome.Text) Then
             erros.Add("Nome é obrigatório")
+        End If
+
+        If String.IsNullOrWhiteSpace(txt_folha.Text) Then
+            erros.Add("Número da folha é obrigatório")
         End If
 
         If erros.Count > 0 Then
@@ -123,32 +144,78 @@ Public Class Cad_funcionario
     End Function
 
     Private Function ValidarCPF(cpf As String) As Boolean
-        ' Implementar validação real de CPF
+        ' Remover formatação
         cpf = cpf.Replace(".", "").Replace("-", "").Replace(",", "")
-        Return cpf.Length = 11 AndAlso IsNumeric(cpf)
-    End Function
 
+        ' Verificar se tem 11 dígitos e se é numérico
+        If cpf.Length <> 11 OrElse Not IsNumeric(cpf) Then
+            Return False
+        End If
+
+        ' Verificar se não são todos dígitos iguais
+        If cpf = New String(cpf(0), 11) Then
+            Return False
+        End If
+
+        ' Aqui você pode implementar a validação completa do CPF se necessário
+        Return True
+    End Function
 
     Private Sub Txt_cpf_LostFocus(sender As Object, e As EventArgs) Handles txt_cpf.LostFocus
         Try
-            sql = $"select * from tb_funcionarios where cpf='{txt_cpf.Text}'"
-            rs = db.Execute(sql)
-            If rs.EOF = False Then
-                txt_nome.Text = rs.Fields("nome").Value
-                cmb_admissao.Value = rs.Fields("data_admissao").Value
-                cmb_nasc.Value = rs.Fields("data_nasc").Value
-                txt_pis.Text = rs.Fields("pis").Value
-                cmb_empresa.Text = rs.Fields("empresa").Value
-                txt_folha.Text = rs.Fields("folha").Value
-                txt_cargo.Text = rs.Fields("cargo").Value
-                cmb_horario.Text = rs.Fields("horario").Value
-                cmb_demissao.Value = rs.Fields("data_demissao").Value
-                img_foto.Load(rs.Fields("foto").Value)
+            If String.IsNullOrWhiteSpace(txt_cpf.Text) OrElse txt_cpf.Text = ",,-" Then
+                Exit Sub
+            End If
+
+            Dim cpfLimpo As String = txt_cpf.Text.Replace(".", "").Replace("-", "").Replace(",", "")
+            sql = $"SELECT * FROM tb_funcionarios WHERE cpf='{cpfLimpo}'"
+            rs = ExecutarConsulta(sql)
+
+            If Not rs Is Nothing AndAlso Not rs.EOF Then
+                PreencherCampos(rs)
+                LimparRecordset(rs)
             Else
                 txt_nome.Focus()
+                If Not rs Is Nothing Then
+                    LimparRecordset(rs)
+                End If
             End If
+
         Catch ex As Exception
-            MsgBox("Erro ao Consultar!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+            MsgBox("Erro ao consultar funcionário! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
+    End Sub
+
+    Private Sub PreencherCampos(ByRef recordset As ADODB.Recordset)
+        Try
+            txt_nome.Text = If(IsDBNull(recordset.Fields("nome").Value), "", recordset.Fields("nome").Value)
+
+            If Not IsDBNull(recordset.Fields("data_admissao").Value) Then
+                cmb_admissao.Value = recordset.Fields("data_admissao").Value
+            End If
+
+            If Not IsDBNull(recordset.Fields("data_nasc").Value) Then
+                cmb_nasc.Value = recordset.Fields("data_nasc").Value
+            End If
+
+            txt_pis.Text = If(IsDBNull(recordset.Fields("pis").Value), "", recordset.Fields("pis").Value)
+            cmb_empresa.Text = If(IsDBNull(recordset.Fields("empresa").Value), "", recordset.Fields("empresa").Value)
+            txt_folha.Text = If(IsDBNull(recordset.Fields("folha").Value), "", recordset.Fields("folha").Value)
+            txt_cargo.Text = If(IsDBNull(recordset.Fields("cargo").Value), "", recordset.Fields("cargo").Value)
+            cmb_horario.Text = If(IsDBNull(recordset.Fields("horario").Value), "", recordset.Fields("horario").Value)
+
+            If Not IsDBNull(recordset.Fields("data_demissao").Value) Then
+                cmb_demissao.Value = recordset.Fields("data_demissao").Value
+            End If
+
+            Dim fotoPath As String = If(IsDBNull(recordset.Fields("foto").Value), "", recordset.Fields("foto").Value)
+            If Not String.IsNullOrEmpty(fotoPath) AndAlso File.Exists(fotoPath) Then
+                img_foto.Load(fotoPath)
+                diretorio = fotoPath
+            End If
+
+        Catch ex As Exception
+            MsgBox("Erro ao preencher campos: " & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
         End Try
     End Sub
 
@@ -163,25 +230,10 @@ Public Class Cad_funcionario
     Public Sub PreencherPorCPF(cpf As String)
         Try
             txt_cpf.Text = cpf
-            ' Replicar lógica do Txt_cpf_LostFocus
-            sql = $"select * from tb_funcionarios where cpf='{cpf}'"
-            rs = db.Execute(sql)
-            If rs.EOF = False Then
-                txt_nome.Text = rs.Fields("nome").Value
-                cmb_admissao.Value = rs.Fields("data_admissao").Value
-                cmb_nasc.Value = rs.Fields("data_nasc").Value
-                txt_pis.Text = rs.Fields("pis").Value
-                cmb_empresa.Text = rs.Fields("empresa").Value
-                txt_folha.Text = rs.Fields("folha").Value
-                txt_cargo.Text = rs.Fields("cargo").Value
-                cmb_horario.Text = rs.Fields("horario").Value
-                cmb_demissao.Value = rs.Fields("data_demissao").Value
-                img_foto.Load(rs.Fields("foto").Value)
-            Else
-                txt_nome.Focus()
-            End If
+            ' Simular o evento LostFocus
+            Txt_cpf_LostFocus(txt_cpf, EventArgs.Empty)
         Catch ex As Exception
-            MsgBox("Erro ao Consultar! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+            MsgBox("Erro ao preencher por CPF! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
         End Try
     End Sub
 
@@ -197,10 +249,17 @@ Public Class Cad_funcionario
             txt_cargo.Clear()
             cmb_horario.Text = ""
             cmb_demissao.Value = Now
-            img_foto.Load(Application.StartupPath & "\Fotos\nova_foto.png")
+
+            ' Carregar foto padrão
+            Dim fotoDefault As String = Path.Combine(Application.StartupPath, "Fotos", "nova_foto.png")
+            If File.Exists(fotoDefault) Then
+                img_foto.Load(fotoDefault)
+            End If
+
+            diretorio = ""
             txt_cpf.Focus()
         Catch ex As Exception
-            Exit Sub
+            ' Ignorar erros ao limpar
         End Try
     End Sub
 End Class
