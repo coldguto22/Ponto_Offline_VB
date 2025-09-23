@@ -26,10 +26,16 @@ Public Class cad_empresa
         End Try
     End Sub
 
+    Private Function ValidarCNPJ(cnpj As String) As Boolean
+        cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "")
+        ' Apenas verifica se está preenchido e tem 14 dígitos
+        Return Not String.IsNullOrWhiteSpace(cnpj) AndAlso cnpj.Length = 14 AndAlso IsNumeric(cnpj)
+    End Function
+
     Private Sub Btn_concluir_Click(sender As Object, e As EventArgs) Handles btn_concluir.Click
         Try
-            If String.IsNullOrWhiteSpace(txt_cnpj.Text) Then
-                MsgBox("Informe o CNPJ.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
+            If String.IsNullOrWhiteSpace(txt_cnpj.Text) OrElse ValidarCNPJ(txt_cnpj.Text) Then
+                MsgBox("Informe um CNPJ válido.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
                 txt_cnpj.Focus()
                 Exit Sub
             End If
@@ -53,6 +59,7 @@ Public Class cad_empresa
                 Limpar_cadastro()
                 img_logo.Image = Nothing
                 logoPath = ""
+                MsgBox("Empresa cadastrada com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
             Else
                 MsgBox("Empresa Já Cadastrada!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
                 txt_cnpj.Focus()
@@ -63,7 +70,7 @@ Public Class cad_empresa
         End Try
     End Sub
 
-    Private Sub txt_cnpj_LostFocus(sender As Object, e As EventArgs)
+    Public Sub txt_cnpj_LostFocus(sender As Object, e As EventArgs)
         Try
             sql = $"select * from tb_empresas where cnpj='{txt_cnpj.Text}'"
             rs = db.Execute(sql)

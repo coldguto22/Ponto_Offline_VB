@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 
 Public Class Cad_funcionario
+    ' Evento para notificar cadastro concluído
+    Public Event FuncionarioCadastrado()
+
     ' No cad_funcionario.vb
     Private Sub Img_foto_Click(sender As Object, e As EventArgs) Handles img_foto.Click
         Try
@@ -86,6 +89,7 @@ Public Class Cad_funcionario
                     If ExecutarComando(sql) Then
                         MsgBox("Funcionário cadastrado com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
                         Limpar_cadastro()
+                        RaiseEvent FuncionarioCadastrado() ' Notifica cadastro
                     End If
                 Else
                     ' Atualizar registro existente
@@ -109,6 +113,7 @@ Public Class Cad_funcionario
                     If ExecutarComando(sql) Then
                         MsgBox("Funcionário atualizado com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
                         Limpar_cadastro()
+                        RaiseEvent FuncionarioCadastrado() ' Notifica atualização
                     End If
                 End If
             End If
@@ -136,7 +141,7 @@ Public Class Cad_funcionario
         End If
 
         If erros.Count > 0 Then
-            MessageBox.Show(String.Join(Environment.NewLine, erros), "Campos Obrigatórios", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show(String.Join(Environment.NewLine, erros), "Campos Obligatórios", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
@@ -144,21 +149,22 @@ Public Class Cad_funcionario
     End Function
 
     Private Function ValidarCPF(cpf As String) As Boolean
-        ' Remover formatação
         cpf = cpf.Replace(".", "").Replace("-", "").Replace(",", "")
-
-        ' Verificar se tem 11 dígitos e se é numérico
-        If cpf.Length <> 11 OrElse Not IsNumeric(cpf) Then
-            Return False
-        End If
-
-        ' Verificar se não são todos dígitos iguais
-        If cpf = New String(cpf(0), 11) Then
-            Return False
-        End If
-
-        ' Aqui você pode implementar a validação completa do CPF se necessário
-        Return True
+        If cpf.Length <> 11 OrElse Not IsNumeric(cpf) Then Return False
+        If cpf = New String(cpf(0), 11) Then Return False
+        Dim soma As Integer = 0
+        For i As Integer = 0 To 8
+            soma += Integer.Parse(cpf(i)) * (10 - i)
+        Next
+        Dim resto As Integer = soma Mod 11
+        Dim digito1 As Integer = If(resto < 2, 0, 11 - resto)
+        soma = 0
+        For i As Integer = 0 To 9
+            soma += Integer.Parse(cpf(i)) * (11 - i)
+        Next
+        resto = soma Mod 11
+        Dim digito2 As Integer = If(resto < 2, 0, 11 - resto)
+        Return cpf.EndsWith(digito1.ToString() & digito2.ToString())
     End Function
 
     Private Sub Txt_cpf_LostFocus(sender As Object, e As EventArgs) Handles txt_cpf.LostFocus
@@ -248,8 +254,9 @@ Public Class Cad_funcionario
             txt_folha.Clear()
             txt_cargo.Clear()
             cmb_horario.Text = ""
-            cmb_demissao.Value = Now
-
+            ' Deixa o campo de demissão vazio
+            cmb_demissao.Format = DateTimePickerFormat.Custom
+            cmb_demissao.CustomFormat = " "
             ' Carregar foto padrão
             Dim fotoDefault As String = Path.Combine(Application.StartupPath, "Fotos", "nova_foto.png")
             If File.Exists(fotoDefault) Then
@@ -261,5 +268,10 @@ Public Class Cad_funcionario
         Catch ex As Exception
             ' Ignorar erros ao limpar
         End Try
+    End Sub
+
+    Private Sub cmb_demissao_ValueChanged(sender As Object, e As EventArgs) Handles cmb_demissao.ValueChanged
+        cmb_demissao.Format = DateTimePickerFormat.Short
+        cmb_demissao.CustomFormat = "dd/MM/yyyy"
     End Sub
 End Class

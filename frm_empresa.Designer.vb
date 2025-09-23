@@ -27,6 +27,8 @@ Partial Class frm_empresa
         Me.TbempresasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PontoOfflineVBDataSet = New Ponto_Offline_VB.PontoOfflineVBDataSet()
         Me.btn_novo = New System.Windows.Forms.Button()
+        Me.btn_editar = New System.Windows.Forms.Button()
+        Me.btn_excluir = New System.Windows.Forms.Button()
         Me.Tb_empresasTableAdapter = New Ponto_Offline_VB.PontoOfflineVBDataSetTableAdapters.tb_empresasTableAdapter()
         CType(Me.dgv_empresas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TbempresasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,6 +75,7 @@ Partial Class frm_empresa
         'PontoOfflineVBDataSet
         '
         Me.PontoOfflineVBDataSet.DataSetName = "PontoOfflineVBDataSet"
+        Me.PontoOfflineVBDataSet.Namespace = "http://tempuri.org/PontoOfflineVBDataSet.xsd"
         Me.PontoOfflineVBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'btn_novo
@@ -84,6 +87,24 @@ Partial Class frm_empresa
         Me.btn_novo.Text = "Nova Empresa"
         Me.btn_novo.UseVisualStyleBackColor = True
         '
+        'btn_editar
+        '
+        Me.btn_editar.Location = New System.Drawing.Point(154, 17)
+        Me.btn_editar.Name = "btn_editar"
+        Me.btn_editar.Size = New System.Drawing.Size(134, 28)
+        Me.btn_editar.TabIndex = 28
+        Me.btn_editar.Text = "EDITAR"
+        Me.btn_editar.UseVisualStyleBackColor = True
+        '
+        'btn_excluir
+        '
+        Me.btn_excluir.Location = New System.Drawing.Point(319, 17)
+        Me.btn_excluir.Name = "btn_excluir"
+        Me.btn_excluir.Size = New System.Drawing.Size(134, 28)
+        Me.btn_excluir.TabIndex = 29
+        Me.btn_excluir.Text = "EXCLUIR"
+        Me.btn_excluir.UseVisualStyleBackColor = True
+        '
         'Tb_empresasTableAdapter
         '
         Me.Tb_empresasTableAdapter.ClearBeforeFill = True
@@ -93,6 +114,8 @@ Partial Class frm_empresa
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 411)
+        Me.Controls.Add(Me.btn_excluir)
+        Me.Controls.Add(Me.btn_editar)
         Me.Controls.Add(Me.btn_novo)
         Me.Controls.Add(Me.dgv_empresas)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -112,4 +135,6 @@ Partial Class frm_empresa
     Friend WithEvents Tb_empresasTableAdapter As Ponto_Offline_VB.PontoOfflineVBDataSetTableAdapters.tb_empresasTableAdapter
     Friend WithEvents CnpjDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents RazaosocialDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents btn_editar As Button
+    Friend WithEvents btn_excluir As Button
 End Class

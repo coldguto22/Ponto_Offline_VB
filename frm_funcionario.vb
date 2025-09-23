@@ -23,6 +23,7 @@
         'TODO: This line of code loads data into the 'PontoOfflineVBDataSet1.tb_funcionarios' table. You can move, or remove it, as needed.
         Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet1.tb_funcionarios)
         Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet.tb_funcionarios)
+        AddHandler Cad_funcionario.FuncionarioCadastrado, AddressOf AtualizarGrid
         AtualizarGrid() ' Chama para definir o título com contador
     End Sub
 
@@ -56,4 +57,3 @@
     End Sub
 
 End Class
-''``````
