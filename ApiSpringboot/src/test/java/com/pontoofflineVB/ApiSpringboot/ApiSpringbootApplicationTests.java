@@ -1,10 +1,10 @@
-package com.pontoofflineVB.pontoofflineAPI;
+package com.pontoofflineVB.ApiSpringboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PontoofflineApiApplicationTests {
+class ApiSpringbootApplicationTests {
 
 	@Test
 	void contextLoads() {

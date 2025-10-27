@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pontoofflineVB</groupId>
-	<artifactId>pontoofflineAPI</artifactId>
+	<artifactId>ApiSpringboot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pontoofflineAPI</name>
+	<name>ApiSpringboot</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -27,7 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>25</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -73,6 +73,15 @@
 
 	<build>
 		<plugins>
+			<!-- Ensure compilation uses Java 21 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<release>21</release>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

@@ -77,3 +77,24 @@ Para patches: faça fork → branch → pull request.
 
 📄 Licença
 Este projeto está disponível sob a licença MIT.
+
+## Java runtime (ApiSpringBoot)
+
+Nota rápida: o módulo `ApiSpringBoot` agora tem como alvo o Java 21 (LTS).
+
+- O `pom.xml` do módulo define `<java.version>21` e o projeto usa o
+   `maven-compiler-plugin` configurado com `<release>21` para garantir
+   compatibilidade de bytecode.
+- Na sua máquina de desenvolvimento ou CI, tenha o JDK 21 disponível. Se
+   houver uma versão mais nova instalada (por exemplo JDK 23), o compilador
+   ainda pode gerar bytecode alvo para 21 usando a opção `--release`.
+
+Como compilar o módulo (usando o wrapper Maven incluído):
+
+```powershell
+cd 'c:\Users\Guto\source\repos\coldguto22\Ponto_Offline_VB\ApiSpringboot'
+.\mvnw.cmd -v
+.\mvnw.cmd package
+```
+
+Para CI (GitHub Actions), use `actions/setup-java` com `java-version: '21'`.

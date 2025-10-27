@@ -1,13 +1,13 @@
-package com.pontoofflineVB.pontoofflineAPI;
+package com.pontoofflineVB.ApiSpringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PontoofflineApiApplication {
+public class ApiSpringbootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PontoofflineApiApplication.class, args);
+		SpringApplication.run(ApiSpringbootApplication.class, args);
 	}
 
 }
