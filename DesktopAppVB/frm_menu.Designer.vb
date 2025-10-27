@@ -59,21 +59,24 @@ Partial Class frm_menu
         '
         Me.EmpresaToolStripMenuItem.Image = CType(resources.GetObject("EmpresaToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EmpresaToolStripMenuItem.Name = "EmpresaToolStripMenuItem"
-        Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.EmpresaToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
+        Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.EmpresaToolStripMenuItem.Text = "Empresa"
         '
         'HorárioToolStripMenuItem
         '
         Me.HorárioToolStripMenuItem.Image = CType(resources.GetObject("HorárioToolStripMenuItem.Image"), System.Drawing.Image)
         Me.HorárioToolStripMenuItem.Name = "HorárioToolStripMenuItem"
-        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HorárioToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.H), System.Windows.Forms.Keys)
+        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.HorárioToolStripMenuItem.Text = "Horário"
         '
         'FuncionárioToolStripMenuItem
         '
         Me.FuncionárioToolStripMenuItem.Image = CType(resources.GetObject("FuncionárioToolStripMenuItem.Image"), System.Drawing.Image)
         Me.FuncionárioToolStripMenuItem.Name = "FuncionárioToolStripMenuItem"
-        Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FuncionárioToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
+        Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.FuncionárioToolStripMenuItem.Text = "Funcionário"
         '
         'GerenciamentoToolStripMenuItem

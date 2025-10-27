@@ -75,21 +75,20 @@ Partial Class frm_empresa
         'PontoOfflineVBDataSet
         '
         Me.PontoOfflineVBDataSet.DataSetName = "PontoOfflineVBDataSet"
-        Me.PontoOfflineVBDataSet.Namespace = "http://tempuri.org/PontoOfflineVBDataSet.xsd"
         Me.PontoOfflineVBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'btn_novo
         '
-        Me.btn_novo.Location = New System.Drawing.Point(12, 12)
+        Me.btn_novo.Location = New System.Drawing.Point(12, 13)
         Me.btn_novo.Name = "btn_novo"
-        Me.btn_novo.Size = New System.Drawing.Size(120, 33)
+        Me.btn_novo.Size = New System.Drawing.Size(120, 28)
         Me.btn_novo.TabIndex = 1
-        Me.btn_novo.Text = "Nova Empresa"
+        Me.btn_novo.Text = "ADICIONAR"
         Me.btn_novo.UseVisualStyleBackColor = True
         '
         'btn_editar
         '
-        Me.btn_editar.Location = New System.Drawing.Point(154, 17)
+        Me.btn_editar.Location = New System.Drawing.Point(154, 13)
         Me.btn_editar.Name = "btn_editar"
         Me.btn_editar.Size = New System.Drawing.Size(134, 28)
         Me.btn_editar.TabIndex = 28
@@ -98,7 +97,7 @@ Partial Class frm_empresa
         '
         'btn_excluir
         '
-        Me.btn_excluir.Location = New System.Drawing.Point(319, 17)
+        Me.btn_excluir.Location = New System.Drawing.Point(319, 14)
         Me.btn_excluir.Name = "btn_excluir"
         Me.btn_excluir.Size = New System.Drawing.Size(134, 28)
         Me.btn_excluir.TabIndex = 29
@@ -113,14 +112,14 @@ Partial Class frm_empresa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 411)
+        Me.ClientSize = New System.Drawing.Size(788, 422)
         Me.Controls.Add(Me.btn_excluir)
         Me.Controls.Add(Me.btn_editar)
         Me.Controls.Add(Me.btn_novo)
         Me.Controls.Add(Me.dgv_empresas)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frm_empresa"
-        Me.Text = "Empresas"
+        Me.Text = "LISTAGEM DE EMPRESAS"
         CType(Me.dgv_empresas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TbempresasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PontoOfflineVBDataSet, System.ComponentModel.ISupportInitialize).EndInit()

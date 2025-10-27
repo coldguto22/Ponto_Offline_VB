@@ -56,7 +56,7 @@ Partial Class Cad_funcionario
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(25, 127)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(33, 16)
+        Me.Label1.Size = New System.Drawing.Size(34, 16)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "CPF"
         '
@@ -65,7 +65,7 @@ Partial Class Cad_funcionario
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(25, 79)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(47, 16)
+        Me.Label2.Size = New System.Drawing.Size(48, 16)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "NOME"
         '
@@ -74,7 +74,7 @@ Partial Class Cad_funcionario
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(473, 336)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(139, 16)
+        Me.Label3.Size = New System.Drawing.Size(140, 16)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "DATA DE ADMISSÃO"
         '
@@ -135,7 +135,7 @@ Partial Class Cad_funcionario
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(25, 175)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(77, 16)
+        Me.Label6.Size = New System.Drawing.Size(78, 16)
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "PIS/PASEP"
         '
@@ -153,7 +153,7 @@ Partial Class Cad_funcionario
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(25, 336)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(73, 16)
+        Me.Label4.Size = New System.Drawing.Size(74, 16)
         Me.Label4.TabIndex = 15
         Me.Label4.Text = "EMPRESA"
         '
@@ -170,7 +170,7 @@ Partial Class Cad_funcionario
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(25, 31)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(69, 16)
+        Me.Label5.Size = New System.Drawing.Size(70, 16)
         Me.Label5.TabIndex = 16
         Me.Label5.Text = "Nº FOLHA"
         '
@@ -187,7 +187,7 @@ Partial Class Cad_funcionario
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(25, 385)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(55, 16)
+        Me.Label7.Size = New System.Drawing.Size(56, 16)
         Me.Label7.TabIndex = 19
         Me.Label7.Text = "CARGO"
         '
@@ -196,7 +196,7 @@ Partial Class Cad_funcionario
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(25, 433)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(69, 16)
+        Me.Label8.Size = New System.Drawing.Size(70, 16)
         Me.Label8.TabIndex = 21
         Me.Label8.Text = "HORÁRIO"
         '
@@ -224,7 +224,7 @@ Partial Class Cad_funcionario
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(473, 433)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(139, 16)
+        Me.Label9.Size = New System.Drawing.Size(140, 16)
         Me.Label9.TabIndex = 22
         Me.Label9.Text = "DATA DE DEMISSÃO"
         '
@@ -243,7 +243,7 @@ Partial Class Cad_funcionario
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(25, 223)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(158, 16)
+        Me.Label10.Size = New System.Drawing.Size(159, 16)
         Me.Label10.TabIndex = 24
         Me.Label10.Text = "DATA DE NASCIMENTO"
         '
@@ -263,6 +263,7 @@ Partial Class Cad_funcionario
         'PontoOfflineVBDataSet1
         '
         Me.PontoOfflineVBDataSet1.DataSetName = "PontoOfflineVBDataSet"
+        Me.PontoOfflineVBDataSet1.Namespace = "http://tempuri.org/PontoOfflineVBDataSet.xsd"
         Me.PontoOfflineVBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Cad_funcionario
