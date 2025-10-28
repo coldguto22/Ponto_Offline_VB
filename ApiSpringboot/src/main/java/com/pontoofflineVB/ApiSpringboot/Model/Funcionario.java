@@ -1,5 +1,6 @@
 package com.pontoofflineVB.ApiSpringboot.Model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -21,6 +22,13 @@ public class Funcionario {
     private String nome;
     private String CPF;
     private String cargo;
+    private LocalDate dataAdmissao;
+    private String pis;
+    private String folha;
+    private String horario;
+    private LocalDate dataDemissao;
+    private String foto;
+    private LocalDate dataNascimento;
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")
@@ -76,5 +84,61 @@ public class Funcionario {
 
     public void setRegistros(List<RegistroPonto> registros) {
         this.registros = registros;
+    }
+
+    public LocalDate getDataAdmissao() {
+        return dataAdmissao;
+    }
+
+    public void setDataAdmissao(LocalDate dataAdmissao) {
+        this.dataAdmissao = dataAdmissao;
+    }
+
+    public String getPis() {
+        return pis;
+    }
+
+    public void setPis(String pis) {
+        this.pis = pis;
+    }
+
+    public String getFolha() {
+        return folha;
+    }
+
+    public void setFolha(String folha) {
+        this.folha = folha;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public LocalDate getDataDemissao() {
+        return dataDemissao;
+    }
+
+    public void setDataDemissao(LocalDate dataDemissao) {
+        this.dataDemissao = dataDemissao;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }
