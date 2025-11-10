@@ -9,4 +9,6 @@ import com.pontoofflineVB.ApiSpringboot.Model.Funcionario;
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
     List<Funcionario> findByEmpresaId(Long empresaId);
+
+    List<Funcionario> findByCPF(String cpf);
 }

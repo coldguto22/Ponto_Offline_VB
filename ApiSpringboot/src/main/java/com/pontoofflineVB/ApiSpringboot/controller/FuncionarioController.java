@@ -27,7 +27,11 @@ public class FuncionarioController {
     private FuncionarioRepository funcionarioRepository;
 
     @GetMapping
-    public List<Funcionario> listar(@RequestParam(name = "empresaId", required = false) Long empresaId) {
+    public List<Funcionario> listar(@RequestParam(name = "empresaId", required = false) Long empresaId,
+            @RequestParam(name = "cpf", required = false) String cpf) {
+        if (cpf != null && !cpf.isEmpty()) {
+            return funcionarioRepository.findByCPF(cpf);
+        }
         if (empresaId != null) {
             return funcionarioRepository.findByEmpresaId(empresaId);
         }
