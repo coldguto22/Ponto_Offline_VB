@@ -1,7 +1,5 @@
 ## 🚀 Próximos passos (priorizados)
 
-Resumo rápido: com base no seu comentário, priorizei duas frentes principais — 1) tela web para marcação de ponto e 2) tela de gerenciamento de pontos no desktop — e organizei as demais dependências e melhorias em ordem de importância para entregar essas funcionalidades com segurança e confiabilidade.
-
 1) Implementar interface web responsiva para marcação de ponto (PRIORIDADE ALTA)
 	- Objetivo: permitir que funcionários registrem ponto via navegador (desktop/mobile).
 	- Critérios de aceite: rota pública de marcação que aceita autenticação/session; feedback imediato (sucesso/erro); persistência no banco e visualização mínima em lista.
