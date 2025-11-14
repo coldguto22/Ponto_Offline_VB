@@ -4,7 +4,7 @@
 
 CREATE TABLE tb_registros_ponto_pending (
     id BIGINT PRIMARY KEY IDENTITY(1,1),
-    funcionario_id BIGINT NOT NULL,
+    funcionario_cpf VARCHAR(20) NOT NULL,
     data DATE NOT NULL,
     hora TIME NOT NULL,
     tipo NVARCHAR(16) NOT NULL, -- ENTRADA ou SAIDA
@@ -13,8 +13,8 @@ CREATE TABLE tb_registros_ponto_pending (
     criado_em DATETIME DEFAULT GETDATE(),
     sincronizado BIT DEFAULT 0, -- 0 = não sincronizado, 1 = sincronizado
     erro_sincronizacao NVARCHAR(MAX) NULL, -- armazena erro se houver
-    CONSTRAINT fk_funcionario_pending FOREIGN KEY (funcionario_id)
-        REFERENCES tb_funcionarios(id)
+    CONSTRAINT fk_funcionario_pending FOREIGN KEY (funcionario_cpf)
+        REFERENCES tb_funcionarios(cpf)
 );
 
 -- Criar índice para melhorar performance de busca por sincronizados

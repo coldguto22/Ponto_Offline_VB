@@ -10,15 +10,48 @@ Write-Host "  TESTE RÁPIDO DA API COM H2" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-# 1. Testar conexão com API
-Write-Host "[1/10] Testando conexão com API..." -ForegroundColor Yellow
-try {
-    $null = Invoke-RestMethod -Uri "$ApiUrl/api/empresas" -Method Get -ErrorAction Stop
-    Write-Host "✅ API respondendo em $ApiUrl" -ForegroundColor $green
-} catch {
-    Write-Host "❌ API não está respondendo. Certifique-se de que está rodando com: java -jar target/ApiSpringboot-0.0.1-SNAPSHOT.jar" -ForegroundColor $red
-    exit 1
+# Função para testar conexão com retry rápido
+function Wait-ForApi {
+    param(
+        # Use a real API endpoint instead of root to avoid 404 from '/'
+        [string]$Url = "$ApiUrl/api/empresas",
+        [int]$Retries = 6,
+        [int]$DelaySeconds = 2,
+        [int]$TimeoutSec = 2
+    )
+    Write-Host "[1/10] Testando conexão com API (endpoint: $Url)..." -ForegroundColor Yellow
+    Write-Host "  Aguardando em $Url (até ${Retries} tentativas, intervalo ${DelaySeconds}s)" -ForegroundColor DarkCyan
+    
+    for ($i = 1; $i -le $Retries; $i++) {
+        try {
+            $resp = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec $TimeoutSec -ErrorAction Stop
+            Write-Host "✅ Servidor HTTP respondendo em $ApiUrl (status $($resp.StatusCode))" -ForegroundColor Green
+            return $true
+        } catch {
+            $errMsg = $_.Exception.Message
+            if ($errMsg -like "*Connection refused*" -or $errMsg -like "*No connection*" -or $errMsg -like "*ConnectFailure*") {
+                Write-Host "  ⏳ Tentativa $i/${Retries}: conexão recusada (servidor não iniciado?)" -ForegroundColor Yellow
+            } else {
+                Write-Host "  ⏳ Tentativa $i/${Retries}: $errMsg" -ForegroundColor Yellow
+            }
+            
+            if ($i -lt $Retries) {
+                Start-Sleep -Seconds $DelaySeconds
+            }
+        }
+    }
+
+    Write-Host "❌ Erro: Não conseguiu conectar em $Url após ${Retries} tentativas" -ForegroundColor $red
+    Write-Host "   Por favor, verifique:" -ForegroundColor $red
+    Write-Host "   1. API está rodando? (java -jar target/ApiSpringboot-0.0.1-SNAPSHOT.jar)" -ForegroundColor DarkRed
+    Write-Host "   2. Porta 8080 está disponível? (netstat -aon | findstr :8080)" -ForegroundColor DarkRed
+    Write-Host "   3. Firewall bloqueando localhost:8080?" -ForegroundColor DarkRed
+    return $false
 }
+
+# 1. Testar conexão com API (com retry)
+Write-Host ""
+if (-not (Wait-ForApi)) { exit 1 }
 
 # 2. Criar Empresa
 Write-Host ""
