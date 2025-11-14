@@ -8,6 +8,7 @@ public class MarcacaoController {
 
     @GetMapping("/marcacao")
     public String marcacao() {
-        return "marcacao";
+        // Redirect to the static page to avoid requiring a template engine here
+        return "redirect:/marcacao.html";
     }
 }
