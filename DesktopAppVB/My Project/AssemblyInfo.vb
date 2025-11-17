@@ -7,10 +7,10 @@ Imports System.Runtime.InteropServices
 
 ' Revise os valores dos atributos do assembly
 
-<Assembly: AssemblyTitle("prj_cadastro_3DSM")>
+<Assembly: AssemblyTitle("Ponto Offline VB")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("prj_cadastro_3DSM")>
+<Assembly: AssemblyProduct("Ponto Offline VB")>
 <Assembly: AssemblyCopyright("Copyright ©  2025")>
 <Assembly: AssemblyTrademark("")>
 

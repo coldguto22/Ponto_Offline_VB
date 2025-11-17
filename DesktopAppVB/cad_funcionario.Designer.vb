@@ -46,9 +46,7 @@ Partial Class Cad_funcionario
         Me.cmb_nasc = New System.Windows.Forms.DateTimePicker()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btn_concluir = New System.Windows.Forms.Button()
-        Me.PontoOfflineVBDataSet1 = New Ponto_Offline_VB.PontoOfflineVBDataSet()
         CType(Me.img_foto, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PontoOfflineVBDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -260,12 +258,6 @@ Partial Class Cad_funcionario
         Me.btn_concluir.Text = "CONCLUIR"
         Me.btn_concluir.UseVisualStyleBackColor = False
         '
-        'PontoOfflineVBDataSet1
-        '
-        Me.PontoOfflineVBDataSet1.DataSetName = "PontoOfflineVBDataSet"
-        Me.PontoOfflineVBDataSet1.Namespace = "http://tempuri.org/PontoOfflineVBDataSet.xsd"
-        Me.PontoOfflineVBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'Cad_funcionario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -303,7 +295,6 @@ Partial Class Cad_funcionario
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CADASTRO DE FUNCIONÁRIO"
         CType(Me.img_foto, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PontoOfflineVBDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -332,5 +323,4 @@ Partial Class Cad_funcionario
     Friend WithEvents cmb_nasc As DateTimePicker
     Friend WithEvents Label10 As Label
     Friend WithEvents btn_concluir As Button
-    Friend WithEvents PontoOfflineVBDataSet1 As PontoOfflineVBDataSet
 End Class

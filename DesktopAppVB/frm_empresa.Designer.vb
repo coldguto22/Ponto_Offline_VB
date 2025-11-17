@@ -22,17 +22,14 @@ Partial Class frm_empresa
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_empresa))
         Me.dgv_empresas = New System.Windows.Forms.DataGridView()
-        Me.CnpjDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RazaosocialDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TbempresasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PontoOfflineVBDataSet = New Ponto_Offline_VB.PontoOfflineVBDataSet()
         Me.btn_novo = New System.Windows.Forms.Button()
         Me.btn_editar = New System.Windows.Forms.Button()
         Me.btn_excluir = New System.Windows.Forms.Button()
-        Me.Tb_empresasTableAdapter = New Ponto_Offline_VB.PontoOfflineVBDataSetTableAdapters.tb_empresasTableAdapter()
+        Me.PontoOfflineDataSet_Oracle = New Ponto_Offline_VB.PontoOfflineDataSet_Oracle()
+        Me.PontoOfflineDataSetOracleBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.dgv_empresas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TbempresasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PontoOfflineVBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PontoOfflineDataSetOracleBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgv_empresas
@@ -43,39 +40,12 @@ Partial Class frm_empresa
         Me.dgv_empresas.AllowUserToResizeRows = False
         Me.dgv_empresas.AutoGenerateColumns = False
         Me.dgv_empresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_empresas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CnpjDataGridViewTextBoxColumn, Me.RazaosocialDataGridViewTextBoxColumn})
-        Me.dgv_empresas.DataSource = Me.TbempresasBindingSource
+        Me.dgv_empresas.DataSource = Me.PontoOfflineDataSetOracleBindingSource
         Me.dgv_empresas.Location = New System.Drawing.Point(12, 51)
         Me.dgv_empresas.Name = "dgv_empresas"
         Me.dgv_empresas.ReadOnly = True
         Me.dgv_empresas.Size = New System.Drawing.Size(760, 350)
         Me.dgv_empresas.TabIndex = 0
-        '
-        'CnpjDataGridViewTextBoxColumn
-        '
-        Me.CnpjDataGridViewTextBoxColumn.DataPropertyName = "cnpj"
-        Me.CnpjDataGridViewTextBoxColumn.HeaderText = "CNPJ"
-        Me.CnpjDataGridViewTextBoxColumn.Name = "CnpjDataGridViewTextBoxColumn"
-        Me.CnpjDataGridViewTextBoxColumn.ReadOnly = True
-        Me.CnpjDataGridViewTextBoxColumn.Width = 200
-        '
-        'RazaosocialDataGridViewTextBoxColumn
-        '
-        Me.RazaosocialDataGridViewTextBoxColumn.DataPropertyName = "razao_social"
-        Me.RazaosocialDataGridViewTextBoxColumn.HeaderText = "RAZÃO SOCIAL"
-        Me.RazaosocialDataGridViewTextBoxColumn.Name = "RazaosocialDataGridViewTextBoxColumn"
-        Me.RazaosocialDataGridViewTextBoxColumn.ReadOnly = True
-        Me.RazaosocialDataGridViewTextBoxColumn.Width = 450
-        '
-        'TbempresasBindingSource
-        '
-        Me.TbempresasBindingSource.DataMember = "tb_empresas"
-        Me.TbempresasBindingSource.DataSource = Me.PontoOfflineVBDataSet
-        '
-        'PontoOfflineVBDataSet
-        '
-        Me.PontoOfflineVBDataSet.DataSetName = "PontoOfflineVBDataSet"
-        Me.PontoOfflineVBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'btn_novo
         '
@@ -104,9 +74,15 @@ Partial Class frm_empresa
         Me.btn_excluir.Text = "EXCLUIR"
         Me.btn_excluir.UseVisualStyleBackColor = True
         '
-        'Tb_empresasTableAdapter
+        'PontoOfflineDataSet_Oracle
         '
-        Me.Tb_empresasTableAdapter.ClearBeforeFill = True
+        Me.PontoOfflineDataSet_Oracle.DataSetName = "PontoOfflineDataSet_Oracle"
+        Me.PontoOfflineDataSet_Oracle.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'PontoOfflineDataSetOracleBindingSource
+        '
+        Me.PontoOfflineDataSetOracleBindingSource.DataSource = Me.PontoOfflineDataSet_Oracle
+        Me.PontoOfflineDataSetOracleBindingSource.Position = 0
         '
         'frm_empresa
         '
@@ -121,19 +97,18 @@ Partial Class frm_empresa
         Me.Name = "frm_empresa"
         Me.Text = "LISTAGEM DE EMPRESAS"
         CType(Me.dgv_empresas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TbempresasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PontoOfflineVBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PontoOfflineDataSetOracleBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents dgv_empresas As DataGridView
     Friend WithEvents btn_novo As Button
-    Friend WithEvents PontoOfflineVBDataSet As Ponto_Offline_VB.PontoOfflineVBDataSet
-    Friend WithEvents TbempresasBindingSource As BindingSource
-    Friend WithEvents Tb_empresasTableAdapter As Ponto_Offline_VB.PontoOfflineVBDataSetTableAdapters.tb_empresasTableAdapter
     Friend WithEvents CnpjDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents RazaosocialDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents btn_editar As Button
     Friend WithEvents btn_excluir As Button
+    Friend WithEvents PontoOfflineDataSetOracleBindingSource As BindingSource
+    Friend WithEvents PontoOfflineDataSet_Oracle As PontoOfflineDataSet_Oracle
 End Class

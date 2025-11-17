@@ -1,30 +1,38 @@
-﻿Public Class frm_funcionario
+﻿Imports Oracle.ManagedDataAccess.Client
 
-    ' No frm_funcionario.vb
-    Private Sub AtualizarGrid()
+Public Class frm_funcionario
+
+    ' Unifica a atualização do grid usando Oracle
+    Private Sub CarregarFuncionarios()
         Try
-            Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet.tb_funcionarios)
-            ' Opcional: Atualizar título do form com contador
+            Dim sql As String = "SELECT cpf, nome, email, cargo, ativo, data_cadastro FROM tb_funcionarios ORDER BY nome"
+            Dim dt As New DataTable()
+            Dim reader As OracleDataReader = ExecutarConsulta(sql)
+
+            If reader IsNot Nothing Then
+                dt.Load(reader)
+                dgv_funcionarios.DataSource = dt
+                LimparDataReader(reader)
+            End If
+
             Me.Text = $"Funcionários - Total: {dgv_funcionarios.Rows.Count} registros"
         Catch ex As Exception
-            MessageBox.Show($"Erro ao atualizar lista: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Erro ao carregar funcionários: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    ' Modificar o evento existente do btn_novo para incluir atualização
+    ' AtualizarGrid agora apenas chama CarregarFuncionarios
+    Private Sub AtualizarGrid()
+        CarregarFuncionarios()
+    End Sub
+
     Private Sub Btn_novo_Click(sender As Object, e As EventArgs) Handles btn_novo.Click
         Cad_funcionario.ShowDialog()
-        ' Atualizar grid após fechar o formulário de cadastro
         AtualizarGrid()
     End Sub
 
-    ' Adicionar este método no Form_Load para carregar inicialmente
     Private Sub Frm_funcionarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'PontoOfflineVBDataSet1.tb_funcionarios' table. You can move, or remove it, as needed.
-        Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet1.tb_funcionarios)
-        Me.Tb_funcionariosTableAdapter.Fill(Me.PontoOfflineVBDataSet.tb_funcionarios)
-        AddHandler Cad_funcionario.FuncionarioCadastrado, AddressOf AtualizarGrid
-        AtualizarGrid() ' Chama para definir o título com contador
+        CarregarFuncionarios()
     End Sub
 
     Private Sub Btn_atualizar_Click(sender As Object, e As EventArgs) Handles btn_atualizar.Click
@@ -32,7 +40,8 @@
             MessageBox.Show("Selecione um funcionário para atualizar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("CpfDataGridViewTextBoxColumn").Value.ToString()
+
+        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("cpf").Value.ToString()
         Cad_funcionario.PreencherPorCPF(cpfSelecionado)
         Cad_funcionario.ShowDialog()
         AtualizarGrid()
@@ -43,17 +52,24 @@
             MessageBox.Show("Selecione um funcionário para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("CpfDataGridViewTextBoxColumn").Value.ToString()
+
+        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("cpf").Value.ToString()
+
         If MessageBox.Show($"Confirma a exclusão do funcionário CPF: {cpfSelecionado}?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Try
                 sql = $"DELETE FROM tb_funcionarios WHERE cpf='{cpfSelecionado}'"
-                db.Execute(sql)
-                AtualizarGrid()
-                MessageBox.Show("Funcionário excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                If ExecutarComando(sql) Then
+                    AtualizarGrid()
+                    MessageBox.Show("Funcionário excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             Catch ex As Exception
                 MessageBox.Show($"Erro ao excluir funcionário: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
 
+    Private Sub PontoOfflineDataSetOracleBindingSource_CurrentChanged(sender As Object, e As EventArgs) Handles PontoOfflineDataSetOracleBindingSource.CurrentChanged
+
+    End Sub
 End Class

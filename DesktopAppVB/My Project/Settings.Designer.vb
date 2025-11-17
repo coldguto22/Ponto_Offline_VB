@@ -64,6 +64,18 @@ Namespace My
                 Return CType(Me("PontoOfflineVBConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("USER ID=TESTE_PONTO;PASSWORD=Medeixaempaz2001;DATA SOURCE=pontoofflinedb_tp;TNS_A"& _ 
+            "DMIN=C:\Users\Guto\Downloads\Wallet_PontoOfflineDB;WALLET_LOCATION=C:\Users\Guto"& _ 
+            "\Downloads\Wallet_PontoOfflineDB;PERSIST SECURITY INFO=True")>  _
+        Public ReadOnly Property ConnectionString() As String
+            Get
+                Return CType(Me("ConnectionString"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 
