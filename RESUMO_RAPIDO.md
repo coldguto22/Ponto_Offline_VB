@@ -5,7 +5,7 @@
 ### 1. **API Spring Boot Totalmente Funcional**
 - ✅ 15 endpoints REST operacionais
 - ✅ 3 controllers (Empresa, Funcionario, RegistroPonto)
-- ✅ CORS habilitado para desktop + web
+- ✅ CORS habilitado (aplicações clientes e web)
 - ✅ Rodando na porta 8080
 
 ### 2. **Banco de Dados H2 (Zero Configuração)**
@@ -63,7 +63,7 @@ http://localhost:8080/marcacao.html
 ## 📊 Arquitetura Resumida
 
 ```
-VB.NET Desktop + Navegador Web
+Desktop VB.NET (cadastros) + Navegador Web (marcações)
         ↓
     HTTP/REST (CORS habilitado)
         ↓
@@ -150,17 +150,20 @@ Documentação/
 ## 💡 Próximas Ações
 
 ### Imediato (Próximas 2-3 horas)
-1. Integrar `SincronizadorPonto.vb` no VB.NET
-2. Testar sincronização offline
-3. Criar tela de gestão (frm_registros)
+
+1. Aprimorar telas de cadastro no Desktop (funcionários/empresas)
+2. Ajustar perfis de acesso e permissões
+3. Relatórios básicos de presença (CSV/PDF)
 
 ### Curto Prazo (Próxima semana)
-4. Implementar autenticação JWT
-5. Adicionar relatórios (CSV/PDF)
+
+ 1. Implementar autenticação JWT
+ 2. Adicionar relatórios (CSV/PDF)
 
 ### Médio Prazo (Próximo mês)
-6. Migrar para SQL Server (TCP/IP)
-7. Preparar para nuvem (RDS/Cloud SQL)
+
+ 1. Migrar para SQL Server (TCP/IP)
+ 2. Preparar para nuvem (RDS/Cloud SQL)
 
 ---
 

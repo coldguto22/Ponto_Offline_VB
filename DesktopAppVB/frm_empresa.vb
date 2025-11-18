@@ -74,8 +74,7 @@ Public Class frm_empresa
         End If
 
         Dim cnpjSelecionado As String = dgv_empresas.SelectedRows(0).Cells("CNPJ").Value.ToString()
-        cad_empresa.txt_cnpj.Text = cnpjSelecionado
-        cad_empresa.txt_cnpj_LostFocus(Nothing, Nothing)
+        cad_empresa.PreencherPorCNPJ(cnpjSelecionado)
         cad_empresa.ShowDialog()
         AtualizarGrid()
     End Sub

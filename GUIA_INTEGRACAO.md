@@ -1,5 +1,7 @@
 # 🔌 Guia de Integração: Desktop VB.NET + API Spring Boot + Sincronização
 
+> Aviso de escopo: nesta versão, o **DesktopAppVB** é focado em **gestão de cadastros (Funcionários e Empresas)** e **não realiza marcações de ponto**. As seções sobre marcação no desktop e sincronização offline são mantidas aqui apenas como referência histórica/legada.
+
 ## 📋 Resumo do que foi implementado
 
 1. **CORS configurado** na API Spring Boot — desktop e web podem chamar a API

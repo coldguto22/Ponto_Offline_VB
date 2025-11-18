@@ -125,10 +125,10 @@ SELECT COUNT(*) FROM REGISTRO_PONTO;   -- Deve retornar: 1
 ## 🔄 Próximos Passos
 
 ### Curto Prazo (Próximas 2-3 horas)
-1. **Integrar SincronizadorPonto.vb no VB.NET**
-   - Copiar arquivo para projeto
-   - Usar `frm_menu_integracao_exemplo.vb` como referência
-   - Testar sincronização offline
+1. **Aprimorar cadastros no Desktop (VB.NET)**
+   - Ajustar telas de Funcionários e Empresas
+   - Consumir endpoints da API para consultas/atualizações
+   - Definir perfis de acesso
 
 2. **Criar Tela de Gestão (frm_registros)**
    - Listar registros de ponto
@@ -197,12 +197,12 @@ Ponto_Offline_VB/
 │   └── target/
 │       └── ApiSpringboot-...jar            # JAR compilado
 │
-├── DesktopAppVB/                           # App VB.NET
+├── DesktopAppVB/                           # App VB.NET (cadastros)
 │   ├── Module1.vb
 │   ├── frm_menu.vb
 │   ├── frm_funcionario.vb
-│   ├── SincronizadorPonto.vb               # ✅ Pronto para integrar
-│   └── frm_menu_integracao_exemplo.vb      # ✅ Template de integração
+│   ├── SincronizadorPonto.vb               # Legado (fora do escopo atual)
+│   └── frm_menu_integracao_exemplo.vb      # Exemplo (ajustar para cadastros)
 │
 ├── DOCUMENTAÇÃO/
 │   ├── COMECE_AQUI.md                      # ⭐ Comece aqui
@@ -225,7 +225,7 @@ Ponto_Offline_VB/
 - **Testes:** 10 (automáticos via TESTE_RAPIDO.ps1)
 - **Documentação:** 6 arquivos
 - **Linhas de Código Java:** ~1200
-- **Linhas de Código VB.NET:** ~300 (SincronizadorPonto)
+- **Linhas de Código VB.NET:** ~300 (formularios de cadastros)
 - **Tempo para setup:** 5 minutos
 - **Confiabilidade:** ✅ 100%
 
@@ -251,11 +251,9 @@ Ponto_Offline_VB/
 - Índices para performance
 - Suporte a SQL Server e MySQL
 
-### ✨ Sincronização Offline
-- SincronizadorPonto.vb pronto
-- Retry automático
-- Logging detalhado
-- Background worker assíncrono
+### ✨ Escopo Atual
+- Marcações via interface web/API
+- Desktop focado em cadastros
 
 ### ✨ Documentação Completa
 - 6 guias diferentes

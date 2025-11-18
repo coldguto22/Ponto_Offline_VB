@@ -9,7 +9,8 @@ A API está **já compilada e rodando com H2** na porta **8080**.
 - ✅ CORS habilitado
 - ✅ Todos os 3 controladores prontos (Empresa, Funcionario, RegistroPonto)
 - ✅ `marcacao.html` criado para testes web
-- ✅ `SincronizadorPonto.vb` pronto para integração
+  
+> Observação: o módulo DesktopAppVB é destinado à gestão de cadastros (Funcionários e Empresas) e não realiza marcações de ponto.
 
 ## 2. 🏃 Rodar a API com H2
 
@@ -184,41 +185,27 @@ curl -X GET "http://localhost:8080/api/registros?data=2025-11-11"
 
 ## 4. 🌐 Testar Web Interface (marcacao.html)
 
-1. **Copie o arquivo para o servidor:**
-
-```powershell
-# O arquivo já está criado, apenas serva-o:
-# Coloque marcacao.html em uma pasta acessível pela API
-Copy-Item "c:\Users\Guto\source\repos\coldguto22\Ponto_Offline_VB\DesktopAppVB\marcacao.html" `
-  -Destination "c:\Users\Guto\source\repos\coldguto22\Ponto_Offline_VB\ApiSpringboot\src\main\resources\static\"
-```
-
-2. **Acesse no navegador:**
+1. **Acesse no navegador (já incluído na API):**
 ```
 http://localhost:8080/marcacao.html
 ```
 
-3. **Na interface:**
+2. **Na interface:**
    - Digite CPF: `12345678901` (do funcionário criado)
    - Selecione tipo: `ENTRADA` ou `SAIDA`
    - Clique "Registrar Ponto"
    - Permita geolocalização (opcional)
 
-4. **Verifique se o registro foi criado:**
+3. **Verifique se o registro foi criado:**
 ```powershell
 curl -X GET http://localhost:8080/api/registros
 ```
 
 ---
 
-## 5. 🔄 Testar Sincronização Offline
+## 5. ℹ️ Observação sobre o DesktopAppVB
 
-Depois que tiver a API rodando com sucesso:
-
-1. **Integre `SincronizadorPonto.vb` no seu `frm_menu.vb`**
-2. **Execute a aplicação VB.NET**
-3. **Marque um ponto offline** (desconecte de internet)
-4. **Reconecte à internet** e observe a sincronização automática
+O módulo DesktopAppVB, nesta versão, é focado em gestão de cadastros de Funcionários e Empresas. As **marcações de ponto** devem ser realizadas **exclusivamente pela interface web** ou via **integração com a API**. Trechos anteriores sobre sincronização offline e `SincronizadorPonto.vb` ficam como material legado e não fazem parte do escopo atual.
 
 ---
 

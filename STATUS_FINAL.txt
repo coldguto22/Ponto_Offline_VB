@@ -36,10 +36,10 @@
    └─ Páginas: ~250
    └─ Tempo leitura: 1 hora
 
-✅ Sincronização Offline
-   └─ Módulo: SincronizadorPonto.vb
-   └─ Status: Pronto para integrar
-   └─ Retry: Automático
+✅ Gestão de Cadastros (Desktop)
+  └─ Módulo: DesktopAppVB
+  └─ Escopo: Funcionários e Empresas (cadastros)
+  └─ Observação: marcações de ponto via interface web/API
 
 
 🚀 COMO COMEÇAR (3 PASSOS)

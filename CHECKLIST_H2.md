@@ -84,7 +84,8 @@ ApiSpringboot/
 - ✅ Marcação HTML (`marcacao.html`)
 - ✅ Script de testes automáticos (`TESTE_RAPIDO.ps1`)
 - ✅ Documentação completa (`TESTES_COM_H2.md`)
-- ✅ SincronizadorPonto.vb pronto para integração
+  
+> Observação: o módulo DesktopAppVB é destinado à gestão de cadastros (Funcionários e Empresas) e não realiza marcações de ponto.
 
 ## 🚀 Como Começar (3 Passos)
 
@@ -203,10 +204,10 @@ Longitude: -46.6333
 
 Após confirmar que tudo funciona:
 
-1. **Integrar no VB.NET:**
-   - Copiar `SincronizadorPonto.vb` para projeto VB.NET
-   - Usar `frm_menu_integracao_exemplo.vb` como template
-   - Testar sincronização offline
+1. **Aprimorar o VB.NET (cadastros):**
+   - Ajustar telas de Funcionários e Empresas
+   - Consumir endpoints da API para consultas/atualizações
+   - Definir perfis de acesso
 
 2. **Implementar Tela de Gestão:**
    - Criar `frm_registros` no VB.NET

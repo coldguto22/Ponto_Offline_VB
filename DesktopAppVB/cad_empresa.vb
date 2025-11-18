@@ -40,7 +40,6 @@ Public Class cad_empresa
             ' Remover formatação (pontos, barras, hífens)
             Dim cnpjLimpo As String = txt_cnpj.Text.Replace(".", "").Replace("-", "").Replace("/", "").Trim()
 
-
             Dim cnpj As String = cnpjLimpo
             Dim razao As String = txt_razao.Text.Replace("'", "''")
             Dim fantasia As String = txt_fantasia.Text.Replace("'", "''")
@@ -52,6 +51,7 @@ Public Class cad_empresa
 
             ' Verificar se já existe - TABELA: EMPRESA
             sql = "SELECT COUNT(*) FROM EMPRESA WHERE CNPJ='" & cnpj & "'"
+
             Dim total As Object = ExecutarEscalar(sql)
 
             If total IsNot Nothing AndAlso CInt(total) = 0 Then
@@ -70,7 +70,7 @@ Public Class cad_empresa
                 sql = "UPDATE EMPRESA SET " &
   "RAZAO_SOCIAL='" & razao & "', " &
       "NOME_FANTASIA='" & fantasia & "', " &
-            "INSC_ESTADUAL='" & insc & "', " &
+      "INSC_ESTADUAL='" & insc & "', " &
                  "ENDERECO='" & endereco & "', " &
      "TELEFONE='" & telefone & "', " &
         "EMAIL='" & email & "'"
@@ -121,11 +121,19 @@ Public Class cad_empresa
                     logoPath = ""
                 End If
 
+                ' Bloquear edição do CNPJ quando em modo de atualização
+                txt_cnpj.ReadOnly = True
+                txt_cnpj.BackColor = Color.LightGray
+
                 LimparDataReader(reader)
             Else
                 txt_razao.Focus()
                 img_logo.Image = Nothing
                 logoPath = ""
+
+                ' Permitir edição do CNPJ para novo cadastro
+                txt_cnpj.ReadOnly = False
+                txt_cnpj.BackColor = Color.White
 
                 If reader IsNot Nothing Then
                     LimparDataReader(reader)
@@ -141,10 +149,24 @@ Public Class cad_empresa
         Limpar_cadastro()
         img_logo.Image = Nothing
         logoPath = ""
+
+        ' Reabilitar edição do CNPJ
+        txt_cnpj.ReadOnly = False
+        txt_cnpj.BackColor = Color.White
     End Sub
 
     Private Sub txt_cnpj_TextChanged(sender As Object, e As EventArgs) Handles txt_cnpj.TextChanged
 
+    End Sub
+
+    Public Sub PreencherPorCNPJ(cnpj As String)
+        Try
+            txt_cnpj.Text = cnpj
+            ' Simular o evento LostFocus
+            txt_cnpj_LostFocus(txt_cnpj, EventArgs.Empty)
+        Catch ex As Exception
+            MsgBox("Erro ao preencher por CNPJ! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+        End Try
     End Sub
 
     Public Sub Limpar_cadastro()
@@ -159,6 +181,10 @@ Public Class cad_empresa
             txt_cnpj.Focus()
             img_logo.Image = Nothing
             logoPath = ""
+
+            ' Reabilitar edição do CNPJ
+            txt_cnpj.ReadOnly = False
+            txt_cnpj.BackColor = Color.White
         Catch ex As Exception
             Exit Sub
         End Try

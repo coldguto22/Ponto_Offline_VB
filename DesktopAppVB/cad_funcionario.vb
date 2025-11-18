@@ -142,7 +142,7 @@ Public Class Cad_funcionario
                     sql &= " WHERE CPF='" & cpf & "'"
 
                     If ExecutarComando(sql) Then
-                        MsgBox("Funcionário atualizado com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
+                        MsgBox("Funcionario atualizado com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
                         Limpar_cadastro()
                         RaiseEvent FuncionarioCadastrado()
                     End If
@@ -200,66 +200,85 @@ Public Class Cad_funcionario
 
     Private Sub Txt_cpf_LostFocus(sender As Object, e As EventArgs) Handles txt_cpf.LostFocus
         Try
-            If String.IsNullOrWhiteSpace(txt_cpf.Text) OrElse txt_cpf.Text = ",,-" Then
-                Exit Sub
-            End If
+     If String.IsNullOrWhiteSpace(txt_cpf.Text) OrElse txt_cpf.Text = ",,-" Then
+       Exit Sub
+       End If
 
-            Dim cpfLimpo As String = txt_cpf.Text.Replace(".", "").Replace("-", "").Replace(",", "")
-            ' TABELA: FUNCIONARIO, JOIN com EMPRESA para pegar RAZAO_SOCIAL
+         Dim cpfLimpo As String = txt_cpf.Text.Replace(".", "").Replace("-", "").Replace(",", "")
+        ' TABELA: FUNCIONARIO, JOIN com EMPRESA para pegar RAZAO_SOCIAL
             sql = "SELECT F.*, E.RAZAO_SOCIAL FROM FUNCIONARIO F LEFT JOIN EMPRESA E ON F.EMPRESA_ID = E.ID WHERE F.CPF='" & cpfLimpo & "'"
-            Dim reader As OracleDataReader = ExecutarConsulta(sql)
+      Dim reader As OracleDataReader = ExecutarConsulta(sql)
 
             If reader IsNot Nothing AndAlso reader.Read() Then
-                PreencherCampos(reader)
-                LimparDataReader(reader)
+      PreencherCampos(reader)
+          
+   ' Bloquear edição do CPF quando em modo de atualização
+                txt_cpf.ReadOnly = True
+        txt_cpf.BackColor = Color.LightGray
+
+          LimparDataReader(reader)
             Else
                 txt_nome.Focus()
-                If reader IsNot Nothing Then
-                    LimparDataReader(reader)
-                End If
-            End If
+                
+        ' Permitir edição do CPF para novo cadastro
+      txt_cpf.ReadOnly = False
+       txt_cpf.BackColor = Color.White
+        
+    If reader IsNot Nothing Then
+              LimparDataReader(reader)
+         End If
+ End If
 
         Catch ex As Exception
-            MsgBox("Erro ao consultar funcionário! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
-        End Try
+     MsgBox("Erro ao consultar funcionário! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
+      End Try
     End Sub
 
     Private Sub PreencherCampos(ByVal reader As OracleDataReader)
-        Try
-            txt_nome.Text = If(IsDBNull(reader("NOME")), "", reader("NOME").ToString())
+      Try
+      txt_nome.Text = If(IsDBNull(reader("NOME")), "", reader("NOME").ToString())
 
-            If Not IsDBNull(reader("DATA_ADMISSAO")) Then
-                cmb_admissao.Value = Convert.ToDateTime(reader("DATA_ADMISSAO"))
-            End If
+     If Not IsDBNull(reader("DATA_ADMISSAO")) Then
+            cmb_admissao.Value = Convert.ToDateTime(reader("DATA_ADMISSAO"))
+        End If
 
-            If Not IsDBNull(reader("DATA_NASCIMENTO")) Then
-                cmb_nasc.Value = Convert.ToDateTime(reader("DATA_NASCIMENTO"))
-            End If
+       If Not IsDBNull(reader("DATA_NASCIMENTO")) Then
+          cmb_nasc.Value = Convert.ToDateTime(reader("DATA_NASCIMENTO"))
+ End If
 
-            txt_pis.Text = If(IsDBNull(reader("PIS")), "", reader("PIS").ToString())
-            ' Usar RAZAO_SOCIAL do JOIN
-            cmb_empresa.Text = If(IsDBNull(reader("RAZAO_SOCIAL")), "", reader("RAZAO_SOCIAL").ToString())
+       txt_pis.Text = If(IsDBNull(reader("PIS")), "", reader("PIS").ToString())
+     ' Usar RAZAO_SOCIAL do JOIN
+      cmb_empresa.Text = If(IsDBNull(reader("RAZAO_SOCIAL")), "", reader("RAZAO_SOCIAL").ToString())
             txt_folha.Text = If(IsDBNull(reader("FOLHA")), "", reader("FOLHA").ToString())
-            txt_cargo.Text = If(IsDBNull(reader("CARGO")), "", reader("CARGO").ToString())
-            cmb_horario.Text = If(IsDBNull(reader("HORARIO")), "", reader("HORARIO").ToString())
+       txt_cargo.Text = If(IsDBNull(reader("CARGO")), "", reader("CARGO").ToString())
+  cmb_horario.Text = If(IsDBNull(reader("HORARIO")), "", reader("HORARIO").ToString())
 
             If Not IsDBNull(reader("DATA_DEMISSAO")) Then
-                cmb_demissao.Value = Convert.ToDateTime(reader("DATA_DEMISSAO"))
+         cmb_demissao.Value = Convert.ToDateTime(reader("DATA_DEMISSAO"))
+            End If
+            
+      ' Verificar se existe campo ADMIN no reader
+     If Not IsDBNull(reader("ADMIN")) Then
+                chk_admin.Checked = (CInt(reader("ADMIN")) = 1)
             End If
 
             Dim fotoPath As String = If(IsDBNull(reader("FOTO")), "", reader("FOTO").ToString())
-            If Not String.IsNullOrEmpty(fotoPath) AndAlso File.Exists(fotoPath) Then
-                img_foto.Load(fotoPath)
+      If Not String.IsNullOrEmpty(fotoPath) AndAlso File.Exists(fotoPath) Then
+      img_foto.Load(fotoPath)
                 diretorio = fotoPath
             End If
 
         Catch ex As Exception
-            MsgBox("Erro ao preencher campos: " & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
+   MsgBox("Erro ao preencher campos: " & ex.Message, MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "AVISO")
         End Try
     End Sub
 
     Private Sub Txt_cpf_DoubleClick(sender As Object, e As EventArgs) Handles txt_cpf.DoubleClick
         Limpar_cadastro()
+        
+        ' Reabilitar edição do CPF
+        txt_cpf.ReadOnly = False
+        txt_cpf.BackColor = Color.White
     End Sub
 
     Private Sub Cmb_empresa_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_empresa.SelectedIndexChanged
@@ -268,9 +287,9 @@ Public Class Cad_funcionario
 
     Public Sub PreencherPorCPF(cpf As String)
         Try
-            txt_cpf.Text = cpf
+   txt_cpf.Text = cpf
             ' Simular o evento LostFocus
-            Txt_cpf_LostFocus(txt_cpf, EventArgs.Empty)
+ Txt_cpf_LostFocus(txt_cpf, EventArgs.Empty)
         Catch ex As Exception
             MsgBox("Erro ao preencher por CPF! " & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "AVISO")
         End Try
@@ -278,33 +297,39 @@ Public Class Cad_funcionario
 
     Public Sub Limpar_cadastro()
         Try
-            txt_cpf.Clear()
-            txt_nome.Clear()
-            cmb_admissao.Value = Now
+       txt_cpf.Clear()
+   txt_nome.Clear()
+  cmb_admissao.Value = Now
             cmb_nasc.Value = Now
             txt_pis.Clear()
-            cmb_empresa.Text = ""
-            txt_folha.Clear()
-            txt_cargo.Clear()
-            cmb_horario.Text = ""
+         cmb_empresa.Text = ""
+   txt_folha.Clear()
+         txt_cargo.Clear()
+        cmb_horario.Text = ""
+     chk_admin.Checked = False
             ' Deixa o campo de demissão vazio
-            cmb_demissao.Format = DateTimePickerFormat.Custom
-            cmb_demissao.CustomFormat = " "
-            ' Carregar foto padrão
+ cmb_demissao.Format = DateTimePickerFormat.Custom
+ cmb_demissao.CustomFormat = " "
+   ' Carregar foto padrão
             Dim fotoDefault As String = Path.Combine(Application.StartupPath, "Fotos", "nova_foto.png")
-            If File.Exists(fotoDefault) Then
-                img_foto.Load(fotoDefault)
+     If File.Exists(fotoDefault) Then
+      img_foto.Load(fotoDefault)
             End If
 
-            diretorio = ""
-            txt_cpf.Focus()
+   diretorio = ""
+
+     ' Reabilitar edição do CPF
+            txt_cpf.ReadOnly = False
+   txt_cpf.BackColor = Color.White
+
+        txt_cpf.Focus()
         Catch ex As Exception
-            ' Ignorar erros ao limpar
+    ' Ignorar erros ao limpar
         End Try
     End Sub
 
     Private Sub cmb_demissao_ValueChanged(sender As Object, e As EventArgs) Handles cmb_demissao.ValueChanged
-        cmb_demissao.Format = DateTimePickerFormat.Short
-        cmb_demissao.CustomFormat = "dd/MM/yyyy"
+      cmb_demissao.Format = DateTimePickerFormat.Short
+  cmb_demissao.CustomFormat = "dd/MM/yyyy"
     End Sub
 End Class
