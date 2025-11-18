@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ponto</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo">🕒</div>
+                <div>
+                    <h1>Sistema de Ponto</h1>
+                    <div class="subtitle">Registro e espelho de ponto</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div id="clock" class="clock">--:--:--</div>
+                <div class="avatar" title="Usuário">U</div>
+            </div>
+        </header>
+
+        <!-- LOGIN -->
+        <div id="loginView" class="card">
+            <h2>Entrar</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Usuário (CPF ou Nome)</label>
+                    <input type="text" id="username" placeholder="Ex: 12345678900 ou Maria Silva" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="1234" required>
+                </div>
+                <button type="submit" class="btn-primary">Entrar</button>
+                <div style="opacity:.7;margin-top:6px;font-size:.9rem">Dica: admin / 1234</div>
+            </form>
+            <div id="loginMsg" class="mensagem"></div>
+        </div>
+
+        <!-- APP PRINCIPAL (oculto até login) -->
+        <div id="appView" class="hidden">
+            <div class="card">
+                <div class="top-row">
+                    <h2 id="welcomeTitle">Olá</h2>
+                    <div>
+                        <button id="logoutBtn" class="btn-secondary small">Sair</button>
+                    </div>
+                </div>
+
+                <nav class="tabs">
+                    <button class="tab active" data-tab="registro">Registro do Ponto</button>
+                    <button class="tab" data-tab="espelho">Espelho do Ponto</button>
+                    <button id="tabAdmin" class="tab hidden" data-tab="admin">Administração</button>
+                </nav>
+
+                <section id="registro" class="tab-content">
+                    <h3>Registrar Ponto</h3>
+                    <form id="pontoForm">
+                        <div class="input-group">
+                            <label for="tipo">Tipo</label>
+                            <select id="tipo" required>
+                                <option value="" disabled selected hidden>Selecione...</option>
+                                <option value="ENTRADA">Entrada</option>
+                                <option value="SAIDA">Saída</option>
+                                <option value="INTERVALO_INICIO">Intervalo - Início</option>
+                                <option value="INTERVALO_FIM">Intervalo - Fim</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">✅ Registrar</button>
+                    </form>
+                    <div id="mensagem" class="mensagem"></div>
+                </section>
+
+                <section id="espelho" class="tab-content hidden">
+                    <h3>Espelho do Ponto</h3>
+                    <div class="espelho-actions">
+                        <button id="btnAtualizar" class="btn-secondary">🔄 Atualizar</button>
+                        <button id="btnExportar" class="btn-secondary">📤 Exportar CSV</button>
+                        <button id="btnLimpar" class="btn-secondary hidden">🗑️ Limpar registros</button>
+                    </div>
+                    <div id="listaRegistros" class="lista">
+                        <!-- tabela será inserida aqui -->
+                    </div>
+                </section>
+
+                <section id="admin" class="tab-content hidden">
+                    <h3>Dashboard Administrativo</h3>
+                    <div class="espelho-actions">
+                        <button id="btnExportAll" class="btn-secondary">📤 Exportar Todos (CSV)</button>
+                        <button id="btnClearAll" class="btn-secondary">🗑️ Limpar Todos Registros</button>
+                    </div>
+                    <div id="adminSummary" class="admin-summary">
+                        <!-- KPIs gerais aparecerão aqui -->
+                    </div>
+
+                    <div class="card" style="margin-top:12px;">
+                        <h4 style="margin-bottom:8px">Gráficos</h4>
+                        <div class="charts-grid">
+                            <div class="chart-card"><canvas id="chartAvg" height="160"></canvas></div>
+                            <div class="chart-card"><canvas id="chartDelays" height="160"></canvas></div>
+                            <div class="chart-card"><canvas id="chartCompliance" height="160"></canvas></div>
+                        </div>
+                    </div>
+
+                    <div id="adminTable" class="admin-table">
+                        <!-- Tabela por funcionário -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js for admin charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
