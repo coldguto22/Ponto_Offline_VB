@@ -19,9 +19,7 @@ public class RegistroPonto {
 
     private LocalDate data;
     private LocalTime hora;
-    private String tipo; // “ENTRADA” ou “SAÍDA”
-    private Double latitude;
-    private Double longitude;
+    private String tipo; // "ENTRADA" ou "SAÍDA"
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
@@ -66,21 +64,5 @@ public class RegistroPonto {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 }

@@ -66,18 +66,7 @@
 			<artifactId>oraclepki</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.oracle.database.security</groupId>
-			<artifactId>osdt_core</artifactId>
-			<version>23.9.0.25.07</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle.database.security</groupId>
-			<artifactId>osdt_cert</artifactId>
-			<version>23.9.0.25.07</version>
-			<scope>runtime</scope>
-		</dependency>
+		<!-- osdt_core e osdt_cert removidos: ojdbc11 + oraclepki já incluem suporte completo para Oracle Cloud Wallet -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
