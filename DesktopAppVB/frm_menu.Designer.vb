@@ -26,13 +26,8 @@ Partial Class frm_menu
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.CadastrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmpresaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HorárioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FuncionárioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GerenciamentoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BatchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AppsÚteisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CalculadoraDeHorasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlataformaWebToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EncerrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -40,7 +35,7 @@ Partial Class frm_menu
         'MenuStrip1
         '
         Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CadastrosToolStripMenuItem, Me.GerenciamentoToolStripMenuItem, Me.AppsÚteisToolStripMenuItem, Me.EncerrarToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CadastrosToolStripMenuItem, Me.PlataformaWebToolStripMenuItem, Me.EncerrarToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
@@ -50,7 +45,7 @@ Partial Class frm_menu
         '
         'CadastrosToolStripMenuItem
         '
-        Me.CadastrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpresaToolStripMenuItem, Me.HorárioToolStripMenuItem, Me.FuncionárioToolStripMenuItem})
+        Me.CadastrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpresaToolStripMenuItem, Me.FuncionárioToolStripMenuItem})
         Me.CadastrosToolStripMenuItem.Name = "CadastrosToolStripMenuItem"
         Me.CadastrosToolStripMenuItem.Size = New System.Drawing.Size(79, 21)
         Me.CadastrosToolStripMenuItem.Text = "&Cadastros"
@@ -63,14 +58,6 @@ Partial Class frm_menu
         Me.EmpresaToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.EmpresaToolStripMenuItem.Text = "Empresa"
         '
-        'HorárioToolStripMenuItem
-        '
-        Me.HorárioToolStripMenuItem.Image = CType(resources.GetObject("HorárioToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.HorárioToolStripMenuItem.Name = "HorárioToolStripMenuItem"
-        Me.HorárioToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.H), System.Windows.Forms.Keys)
-        Me.HorárioToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
-        Me.HorárioToolStripMenuItem.Text = "Horário"
-        '
         'FuncionárioToolStripMenuItem
         '
         Me.FuncionárioToolStripMenuItem.Image = CType(resources.GetObject("FuncionárioToolStripMenuItem.Image"), System.Drawing.Image)
@@ -79,37 +66,14 @@ Partial Class frm_menu
         Me.FuncionárioToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.FuncionárioToolStripMenuItem.Text = "Funcionário"
         '
-        'GerenciamentoToolStripMenuItem
+        'PlataformaWebToolStripMenuItem
         '
-        Me.GerenciamentoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WindowsToolStripMenuItem, Me.BatchToolStripMenuItem})
-        Me.GerenciamentoToolStripMenuItem.Name = "GerenciamentoToolStripMenuItem"
-        Me.GerenciamentoToolStripMenuItem.Size = New System.Drawing.Size(108, 21)
-        Me.GerenciamentoToolStripMenuItem.Text = "&Gerenciamento"
-        '
-        'WindowsToolStripMenuItem
-        '
-        Me.WindowsToolStripMenuItem.Name = "WindowsToolStripMenuItem"
-        Me.WindowsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.WindowsToolStripMenuItem.Text = "Importar Batidas"
-        '
-        'BatchToolStripMenuItem
-        '
-        Me.BatchToolStripMenuItem.Name = "BatchToolStripMenuItem"
-        Me.BatchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.BatchToolStripMenuItem.Text = "Gerenciar Pontos"
-        '
-        'AppsÚteisToolStripMenuItem
-        '
-        Me.AppsÚteisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculadoraDeHorasToolStripMenuItem})
-        Me.AppsÚteisToolStripMenuItem.Name = "AppsÚteisToolStripMenuItem"
-        Me.AppsÚteisToolStripMenuItem.Size = New System.Drawing.Size(83, 21)
-        Me.AppsÚteisToolStripMenuItem.Text = "&Apps Úteis"
-        '
-        'CalculadoraDeHorasToolStripMenuItem
-        '
-        Me.CalculadoraDeHorasToolStripMenuItem.Name = "CalculadoraDeHorasToolStripMenuItem"
-        Me.CalculadoraDeHorasToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
-        Me.CalculadoraDeHorasToolStripMenuItem.Text = "Calculadora De Horas"
+        Me.PlataformaWebToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.PlataformaWebToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlataformaWebToolStripMenuItem.Name = "PlataformaWebToolStripMenuItem"
+        Me.PlataformaWebToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
+        Me.PlataformaWebToolStripMenuItem.Size = New System.Drawing.Size(113, 21)
+        Me.PlataformaWebToolStripMenuItem.Text = "Plataforma &Web"
         '
         'EncerrarToolStripMenuItem
         '
@@ -146,12 +110,7 @@ Partial Class frm_menu
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents CadastrosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmpresaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GerenciamentoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents WindowsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents EncerrarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BatchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FuncionárioToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents HorárioToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AppsÚteisToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CalculadoraDeHorasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PlataformaWebToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EncerrarToolStripMenuItem As ToolStripMenuItem
 End Class

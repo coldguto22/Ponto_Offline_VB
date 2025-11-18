@@ -170,35 +170,115 @@
     try{
       const registros = await jsonFetch(api.registros);
       const funcionarios = await jsonFetch(api.funcionarios);
-      const total = registros.length;
-      const byFunc = new Map();
-      registros.forEach(r => byFunc.set(r.funcionarioId, (byFunc.get(r.funcionarioId)||0)+1));
-      const avgPorFunc = total && byFunc.size ? (total/byFunc.size) : 0;
-      const entradas = registros.filter(r => (r.tipo||'').toUpperCase().includes('ENTRADA'));
-      const atrasos = entradas.filter(r => (r.hora||'') > '09:05:00').length;
-      const compliance = entradas.length ? Math.round(100*(1 - (atrasos/entradas.length))) : 100;
 
+      // Helpers to normalize nested shapes and parse times
+      const getFuncId = (r) => r.funcionarioId ?? r.funcionario?.id ?? null;
+      const toMinutes = (t) => {
+        if(!t) return null;
+        const parts = String(t).split(':');
+        const hh = parseInt(parts[0]||'0',10);
+        const mm = parseInt(parts[1]||'0',10);
+        return hh*60 + mm;
+      };
+      const parseHorarioStart = (h) => {
+        if(!h) return '09:00:00';
+        const m = String(h).match(/(\d{1,2}):(\d{2})/);
+        if(!m) return '09:00:00';
+        const hh = m[1].padStart(2,'0');
+        const mm = m[2].padStart(2,'0');
+        return `${hh}:${mm}:00`;
+      };
+
+      // Build schedule map per employee
+      const scheduleByFunc = new Map();
+      funcionarios.forEach(f => {
+        const start = parseHorarioStart(f.horario);
+        scheduleByFunc.set(f.id, start);
+      });
+
+      // Aggregate earliest ENTRADA per funcionário/day
+      const entradas = registros.filter(r => (r.tipo||'').toUpperCase().includes('ENTRADA'));
+      const byDayEmp = new Map(); // key: `${funcId}|${data}` -> earliest minutes
+      entradas.forEach(r => {
+        const fid = getFuncId(r);
+        if(!fid || !r.data || !r.hora) return;
+        const key = `${fid}|${r.data}`;
+        const min = toMinutes(r.hora);
+        if(min == null) return;
+        const prev = byDayEmp.get(key);
+        if(prev == null || min < prev) byDayEmp.set(key, min);
+      });
+
+      // Compute lateness metrics
+      const toleranceMin = 5; // minutos de tolerância
+      let lateCount = 0;
+      let totalLateMinutes = 0;
+      const lateByEmp = new Map(); // empId -> total late minutes
+      const lateByDay = new Map(); // date -> [late minutes]
+
+      for(const [key, firstMin] of byDayEmp.entries()){
+        const [fidStr, day] = key.split('|');
+        const fid = Number(fidStr);
+        const sched = scheduleByFunc.get(fid) || '09:00:00';
+        const schedMin = toMinutes(sched) ?? 9*60;
+        const late = Math.max(0, firstMin - (schedMin + toleranceMin));
+        if(late > 0){
+          lateCount++;
+          totalLateMinutes += late;
+          lateByEmp.set(fid, (lateByEmp.get(fid)||0) + late);
+          if(!lateByDay.has(day)) lateByDay.set(day, []);
+          lateByDay.get(day).push(late);
+        }
+      }
+
+      const totalEntradasDias = byDayEmp.size;
+      const compliance = totalEntradasDias ? Math.round(100*(1 - (lateCount/totalEntradasDias))) : 100;
+      const avgLate = lateCount ? (totalLateMinutes/lateCount) : 0;
+
+      // KPIs na caixa superior
+      const totalRegistros = registros.length;
       box.innerHTML = `
-        <div class="card">Total registros: <b>${total}</b></div>
+        <div class="card">Registros: <b>${totalRegistros}</b></div>
         <div class="card">Funcionários: <b>${funcionarios.length}</b></div>
-        <div class="card">Média por funcionário: <b>${avgPorFunc.toFixed(1)}</b></div>
-        <div class="card">Compliance entr.: <b>${compliance}%</b></div>
+        <div class="card">Pontualidade: <b>${compliance}%</b></div>
+        <div class="card">Atraso médio: <b>${avgLate.toFixed(1)} min</b></div>
       `;
 
-      // Gráficos simples
+      // Gráficos focados em atrasos
       const ctx1 = document.getElementById('chartAvg');
       const ctx2 = document.getElementById('chartDelays');
       const ctx3 = document.getElementById('chartCompliance');
 
-      const porDia = registros.reduce((acc,r)=>{ if(r.data){ acc[r.data]=(acc[r.data]||0)+1 } return acc; },{});
-      const labels1 = Object.keys(porDia).sort();
-      const data1 = labels1.map(k => porDia[k]);
+      // 1) Donut: Pontual x Atrasado (por dia)
+      const onTimeDays = Math.max(0, totalEntradasDias - lateCount);
+      const donutLabels = ['No horário','Atrasado'];
+      const donutData = [onTimeDays, lateCount];
 
-      const porFunc = Array.from(byFunc.entries());
-      const labels2 = porFunc.map(([id]) => `F${id}`);
-      const data2 = porFunc.map(([,q]) => q);
+      // 2) Top 5 funcionários por atraso (minutos)
+      const topEmp = Array.from(lateByEmp.entries())
+        .sort((a,b) => b[1]-a[1])
+        .slice(0,5);
+      const labels2 = topEmp.map(([id]) => {
+        const f = funcionarios.find(x => x.id === id);
+        return f ? (f.nome||`F${id}`) : `F${id}`;
+      });
+      const data2 = topEmp.map(([,min]) => Math.round(min));
 
-      const compVal = compliance;
+      // 3) Linha: atraso médio por dia (últimos 7 dias)
+      const last7 = Array.from({length: 7}, (_,i)=>{
+        const d = new Date(); d.setDate(d.getDate()-i);
+        const y = d.getFullYear();
+        const m = String(d.getMonth()+1).padStart(2,'0');
+        const day = String(d.getDate()).padStart(2,'0');
+        return `${y}-${m}-${day}`;
+      }).reverse();
+      const labels1 = last7;
+      const data1 = labels1.map(day => {
+        const arr = lateByDay.get(day)||[];
+        if(!arr.length) return 0;
+        const sum = arr.reduce((a,b)=>a+b,0);
+        return +(sum/arr.length).toFixed(1);
+      });
 
       const palette = ['#2a6df0','#7c3aed','#10b981','#f59e0b','#ef4444'];
       
@@ -208,9 +288,21 @@
       if (adminCharts.chartCompliance) adminCharts.chartCompliance.destroy();
       
       // Create and store new chart instances
-      adminCharts.chartAvg = new Chart(ctx1,{type:'line',data:{labels:labels1,datasets:[{label:'Registros/Dia',data:data1,borderColor:palette[0]}]},options:{plugins:{legend:{display:false}}}});
-      adminCharts.chartDelays = new Chart(ctx2,{type:'bar',data:{labels:labels2,datasets:[{label:'Registros/Func',data:data2,backgroundColor:palette[1]}]},options:{plugins:{legend:{display:false}}}});
-      adminCharts.chartCompliance = new Chart(ctx3,{type:'doughnut',data:{labels:['OK','Atrasos'],datasets:[{data:[compVal,100-compVal],backgroundColor:[palette[2],palette[4]]}]},options:{plugins:{legend:{display:false}}}});
+      adminCharts.chartAvg = new Chart(ctx1,{
+        type:'line',
+        data:{labels:labels1,datasets:[{label:'Atraso médio (min)',data:data1,borderColor:palette[0],backgroundColor:'rgba(42,109,240,0.1)',fill:true,tension:0.3}]},
+        options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+      });
+      adminCharts.chartDelays = new Chart(ctx2,{
+        type:'bar',
+        data:{labels:labels2,datasets:[{label:'Atraso total (min)',data:data2,backgroundColor:palette[1]}]},
+        options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+      });
+      adminCharts.chartCompliance = new Chart(ctx3,{
+        type:'doughnut',
+        data:{labels:donutLabels,datasets:[{data:donutData,backgroundColor:[palette[2],palette[4]]}]},
+        options:{plugins:{legend:{display:true}}}
+      });
 
     }catch(err){
       console.error(err);
