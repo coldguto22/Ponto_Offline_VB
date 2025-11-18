@@ -2,10 +2,13 @@
 
 Public Class frm_funcionario
 
-    ' Unifica a atualização do grid usando Oracle
+    ' Carrega dados usando Oracle direto - TABELA: FUNCIONARIO
     Private Sub CarregarFuncionarios()
         Try
-            Dim sql As String = "SELECT cpf, nome, email, cargo, ativo, data_cadastro FROM tb_funcionarios ORDER BY nome"
+            ' TABELA: FUNCIONARIO, COLUNAS: CPF, NOME, CARGO
+            ' Nota: Removido EMAIL (não existe na tabela FUNCIONARIO) e DATA_CADASTRO
+            ' Adicionado ATIVO se necessário
+            Dim sql As String = "SELECT CPF, NOME, CARGO FROM FUNCIONARIO ORDER BY NOME"
             Dim dt As New DataTable()
             Dim reader As OracleDataReader = ExecutarConsulta(sql)
 
@@ -13,6 +16,9 @@ Public Class frm_funcionario
                 dt.Load(reader)
                 dgv_funcionarios.DataSource = dt
                 LimparDataReader(reader)
+
+                ' Configurar aparência das colunas após o binding
+                ConfigurarColunas()
             End If
 
             Me.Text = $"Funcionários - Total: {dgv_funcionarios.Rows.Count} registros"
@@ -21,7 +27,32 @@ Public Class frm_funcionario
         End Try
     End Sub
 
-    ' AtualizarGrid agora apenas chama CarregarFuncionarios
+    ' Configura a aparência das colunas após o binding
+    Private Sub ConfigurarColunas()
+        Try
+            If dgv_funcionarios.Columns.Count > 0 Then
+                ' Configurar larguras e textos de cabeçalho
+                If dgv_funcionarios.Columns.Contains("CPF") Then
+                    dgv_funcionarios.Columns("CPF").HeaderText = "CPF"
+                    dgv_funcionarios.Columns("CPF").Width = 150
+                End If
+
+                If dgv_funcionarios.Columns.Contains("NOME") Then
+                    dgv_funcionarios.Columns("NOME").HeaderText = "NOME"
+                    dgv_funcionarios.Columns("NOME").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                End If
+
+                If dgv_funcionarios.Columns.Contains("CARGO") Then
+                    dgv_funcionarios.Columns("CARGO").HeaderText = "CARGO"
+                    dgv_funcionarios.Columns("CARGO").Width = 150
+                End If
+            End If
+        Catch ex As Exception
+            ' Ignorar erros de configuração de colunas
+        End Try
+    End Sub
+
+    ' Atualiza o grid recarregando os dados
     Private Sub AtualizarGrid()
         CarregarFuncionarios()
     End Sub
@@ -32,6 +63,11 @@ Public Class frm_funcionario
     End Sub
 
     Private Sub Frm_funcionarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Limpar colunas do designer e habilitar auto-geração
+        dgv_funcionarios.Columns.Clear()
+        dgv_funcionarios.AutoGenerateColumns = True
+
+        ' Carrega funcionários usando abordagem Oracle direta
         CarregarFuncionarios()
     End Sub
 
@@ -41,7 +77,13 @@ Public Class frm_funcionario
             Return
         End If
 
-        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("cpf").Value.ToString()
+        ' Check if the selected row is the new row placeholder
+        If dgv_funcionarios.SelectedRows(0).IsNewRow Then
+            MessageBox.Show("Não é possível atualizar a linha de novo registro.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("CPF").Value.ToString()
         Cad_funcionario.PreencherPorCPF(cpfSelecionado)
         Cad_funcionario.ShowDialog()
         AtualizarGrid()
@@ -53,11 +95,18 @@ Public Class frm_funcionario
             Return
         End If
 
-        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("cpf").Value.ToString()
+        ' Check if the selected row is the new row placeholder
+        If dgv_funcionarios.SelectedRows(0).IsNewRow Then
+            MessageBox.Show("Não é possível excluir a linha de novo registro.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim cpfSelecionado As String = dgv_funcionarios.SelectedRows(0).Cells("CPF").Value.ToString()
 
         If MessageBox.Show($"Confirma a exclusão do funcionário CPF: {cpfSelecionado}?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Try
-                sql = $"DELETE FROM tb_funcionarios WHERE cpf='{cpfSelecionado}'"
+                ' TABELA: FUNCIONARIO
+                sql = $"DELETE FROM FUNCIONARIO WHERE CPF='{cpfSelecionado}'"
 
                 If ExecutarComando(sql) Then
                     AtualizarGrid()
@@ -69,7 +118,4 @@ Public Class frm_funcionario
         End If
     End Sub
 
-    Private Sub PontoOfflineDataSetOracleBindingSource_CurrentChanged(sender As Object, e As EventArgs) Handles PontoOfflineDataSetOracleBindingSource.CurrentChanged
-
-    End Sub
 End Class

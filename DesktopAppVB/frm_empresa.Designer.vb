@@ -22,14 +22,21 @@ Partial Class frm_empresa
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_empresa))
         Me.dgv_empresas = New System.Windows.Forms.DataGridView()
+        Me.EMPRESABindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PontoOfflineDataSetOracleBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PontoOfflineDataSet_Oracle = New Ponto_Offline_VB.PontoOfflineDataSet_Oracle()
         Me.btn_novo = New System.Windows.Forms.Button()
         Me.btn_editar = New System.Windows.Forms.Button()
         Me.btn_excluir = New System.Windows.Forms.Button()
-        Me.PontoOfflineDataSet_Oracle = New Ponto_Offline_VB.PontoOfflineDataSet_Oracle()
-        Me.PontoOfflineDataSetOracleBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.EMPRESATableAdapter = New Ponto_Offline_VB.PontoOfflineDataSet_OracleTableAdapters.EMPRESATableAdapter()
+        Me.CNPJ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NOME_FANTASIA = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RAZAO_SOCIAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.INSC_ESTADUAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv_empresas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EMPRESABindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PontoOfflineDataSetOracleBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgv_empresas
@@ -39,13 +46,31 @@ Partial Class frm_empresa
         Me.dgv_empresas.AllowUserToResizeColumns = False
         Me.dgv_empresas.AllowUserToResizeRows = False
         Me.dgv_empresas.AutoGenerateColumns = False
+        Me.dgv_empresas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
+        Me.dgv_empresas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders
         Me.dgv_empresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_empresas.DataSource = Me.PontoOfflineDataSetOracleBindingSource
+        Me.dgv_empresas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CNPJ, Me.NOME_FANTASIA, Me.RAZAO_SOCIAL, Me.INSC_ESTADUAL})
+        Me.dgv_empresas.DataSource = Me.EMPRESABindingSource
         Me.dgv_empresas.Location = New System.Drawing.Point(12, 51)
         Me.dgv_empresas.Name = "dgv_empresas"
         Me.dgv_empresas.ReadOnly = True
         Me.dgv_empresas.Size = New System.Drawing.Size(760, 350)
         Me.dgv_empresas.TabIndex = 0
+        '
+        'EMPRESABindingSource
+        '
+        Me.EMPRESABindingSource.DataMember = "EMPRESA"
+        Me.EMPRESABindingSource.DataSource = Me.PontoOfflineDataSetOracleBindingSource
+        '
+        'PontoOfflineDataSetOracleBindingSource
+        '
+        Me.PontoOfflineDataSetOracleBindingSource.DataSource = Me.PontoOfflineDataSet_Oracle
+        Me.PontoOfflineDataSetOracleBindingSource.Position = 0
+        '
+        'PontoOfflineDataSet_Oracle
+        '
+        Me.PontoOfflineDataSet_Oracle.DataSetName = "PontoOfflineDataSet_Oracle"
+        Me.PontoOfflineDataSet_Oracle.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'btn_novo
         '
@@ -74,15 +99,42 @@ Partial Class frm_empresa
         Me.btn_excluir.Text = "EXCLUIR"
         Me.btn_excluir.UseVisualStyleBackColor = True
         '
-        'PontoOfflineDataSet_Oracle
+        'EMPRESATableAdapter
         '
-        Me.PontoOfflineDataSet_Oracle.DataSetName = "PontoOfflineDataSet_Oracle"
-        Me.PontoOfflineDataSet_Oracle.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.EMPRESATableAdapter.ClearBeforeFill = True
         '
-        'PontoOfflineDataSetOracleBindingSource
+        'CNPJ
         '
-        Me.PontoOfflineDataSetOracleBindingSource.DataSource = Me.PontoOfflineDataSet_Oracle
-        Me.PontoOfflineDataSetOracleBindingSource.Position = 0
+        Me.CNPJ.DataPropertyName = "CNPJ"
+        Me.CNPJ.HeaderText = "CNPJ"
+        Me.CNPJ.Name = "CNPJ"
+        Me.CNPJ.ReadOnly = True
+        Me.CNPJ.Width = 59
+        '
+        'NOME_FANTASIA
+        '
+        Me.NOME_FANTASIA.DataPropertyName = "NOME_FANTASIA"
+        Me.NOME_FANTASIA.HeaderText = "NOME_FANTASIA"
+        Me.NOME_FANTASIA.Name = "NOME_FANTASIA"
+        Me.NOME_FANTASIA.ReadOnly = True
+        Me.NOME_FANTASIA.Width = 122
+        '
+        'RAZAO_SOCIAL
+        '
+        Me.RAZAO_SOCIAL.DataPropertyName = "RAZAO_SOCIAL"
+        Me.RAZAO_SOCIAL.HeaderText = "RAZAO_SOCIAL"
+        Me.RAZAO_SOCIAL.Name = "RAZAO_SOCIAL"
+        Me.RAZAO_SOCIAL.ReadOnly = True
+        Me.RAZAO_SOCIAL.Width = 113
+        '
+        'INSC_ESTADUAL
+        '
+        Me.INSC_ESTADUAL.DataPropertyName = "INSC_ESTADUAL"
+        Me.INSC_ESTADUAL.HeaderText = "INSC_ESTADUAL"
+        Me.INSC_ESTADUAL.Name = "INSC_ESTADUAL"
+        Me.INSC_ESTADUAL.ReadOnly = True
+        Me.INSC_ESTADUAL.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.INSC_ESTADUAL.Width = 120
         '
         'frm_empresa
         '
@@ -97,8 +149,9 @@ Partial Class frm_empresa
         Me.Name = "frm_empresa"
         Me.Text = "LISTAGEM DE EMPRESAS"
         CType(Me.dgv_empresas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EMPRESABindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PontoOfflineDataSetOracleBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -111,4 +164,10 @@ Partial Class frm_empresa
     Friend WithEvents btn_excluir As Button
     Friend WithEvents PontoOfflineDataSetOracleBindingSource As BindingSource
     Friend WithEvents PontoOfflineDataSet_Oracle As PontoOfflineDataSet_Oracle
+    Friend WithEvents EMPRESABindingSource As BindingSource
+    Friend WithEvents EMPRESATableAdapter As PontoOfflineDataSet_OracleTableAdapters.EMPRESATableAdapter
+    Friend WithEvents CNPJ As DataGridViewTextBoxColumn
+    Friend WithEvents NOME_FANTASIA As DataGridViewTextBoxColumn
+    Friend WithEvents RAZAO_SOCIAL As DataGridViewTextBoxColumn
+    Friend WithEvents INSC_ESTADUAL As DataGridViewTextBoxColumn
 End Class

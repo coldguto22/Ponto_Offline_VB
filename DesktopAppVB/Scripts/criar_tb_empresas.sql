@@ -1,1 +1,0 @@
-ALTER TABLE tb_empresas ADD logo NVARCHAR(255)

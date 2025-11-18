@@ -25,26 +25,45 @@ Partial Class frm_funcionario
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_funcionario))
         Me.dgv_funcionarios = New System.Windows.Forms.DataGridView()
+        Me.PontoOfflineDataSetOracleBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PontoOfflineDataSet_Oracle = New Ponto_Offline_VB.PontoOfflineDataSet_Oracle()
         Me.btn_novo = New System.Windows.Forms.Button()
         Me.btn_atualizar = New System.Windows.Forms.Button()
         Me.btn_excluir = New System.Windows.Forms.Button()
-        Me.PontoOfflineDataSet_Oracle = New Ponto_Offline_VB.PontoOfflineDataSet_Oracle()
-        Me.PontoOfflineDataSetOracleBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FUNCIONARIOBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FUNCIONARIOTableAdapter = New Ponto_Offline_VB.PontoOfflineDataSet_OracleTableAdapters.FUNCIONARIOTableAdapter()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EMPRESAIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv_funcionarios, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PontoOfflineDataSetOracleBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FUNCIONARIOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgv_funcionarios
         '
         Me.dgv_funcionarios.AutoGenerateColumns = False
         Me.dgv_funcionarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_funcionarios.DataSource = Me.PontoOfflineDataSetOracleBindingSource
+        Me.dgv_funcionarios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.EMPRESAIDDataGridViewTextBoxColumn})
+        Me.dgv_funcionarios.DataSource = Me.FUNCIONARIOBindingSource
         Me.dgv_funcionarios.Location = New System.Drawing.Point(199, 13)
         Me.dgv_funcionarios.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.dgv_funcionarios.Name = "dgv_funcionarios"
         Me.dgv_funcionarios.Size = New System.Drawing.Size(880, 486)
         Me.dgv_funcionarios.TabIndex = 0
+        '
+        'PontoOfflineDataSetOracleBindingSource
+        '
+        Me.PontoOfflineDataSetOracleBindingSource.DataSource = Me.PontoOfflineDataSet_Oracle
+        Me.PontoOfflineDataSetOracleBindingSource.Position = 0
+        '
+        'PontoOfflineDataSet_Oracle
+        '
+        Me.PontoOfflineDataSet_Oracle.DataSetName = "PontoOfflineDataSet_Oracle"
+        Me.PontoOfflineDataSet_Oracle.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'btn_novo
         '
@@ -85,15 +104,44 @@ Partial Class frm_funcionario
         Me.btn_excluir.Text = "EXCLUIR"
         Me.btn_excluir.UseVisualStyleBackColor = False
         '
-        'PontoOfflineDataSet_Oracle
+        'FUNCIONARIOBindingSource
         '
-        Me.PontoOfflineDataSet_Oracle.DataSetName = "PontoOfflineDataSet_Oracle"
-        Me.PontoOfflineDataSet_Oracle.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.FUNCIONARIOBindingSource.DataMember = "FUNCIONARIO"
+        Me.FUNCIONARIOBindingSource.DataSource = Me.PontoOfflineDataSetOracleBindingSource
         '
-        'PontoOfflineDataSetOracleBindingSource
+        'FUNCIONARIOTableAdapter
         '
-        Me.PontoOfflineDataSetOracleBindingSource.DataSource = Me.PontoOfflineDataSet_Oracle
-        Me.PontoOfflineDataSetOracleBindingSource.Position = 0
+        Me.FUNCIONARIOTableAdapter.ClearBeforeFill = True
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "FOLHA"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "FOLHA"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "NOME"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "NOME"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "CPF"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "CPF"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "PIS"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "PIS"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'EMPRESAIDDataGridViewTextBoxColumn
+        '
+        Me.EMPRESAIDDataGridViewTextBoxColumn.DataPropertyName = "EMPRESA_ID"
+        Me.EMPRESAIDDataGridViewTextBoxColumn.HeaderText = "EMPRESA_ID"
+        Me.EMPRESAIDDataGridViewTextBoxColumn.Name = "EMPRESAIDDataGridViewTextBoxColumn"
         '
         'frm_funcionario
         '
@@ -110,8 +158,9 @@ Partial Class frm_funcionario
         Me.Name = "frm_funcionario"
         Me.Text = "LISTAGEM DE FUNCIONÁRIOS"
         CType(Me.dgv_funcionarios, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PontoOfflineDataSetOracleBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PontoOfflineDataSet_Oracle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FUNCIONARIOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -127,4 +176,11 @@ Partial Class frm_funcionario
     Friend WithEvents btn_excluir As Button
     Friend WithEvents PontoOfflineDataSetOracleBindingSource As BindingSource
     Friend WithEvents PontoOfflineDataSet_Oracle As PontoOfflineDataSet_Oracle
+    Friend WithEvents FUNCIONARIOBindingSource As BindingSource
+    Friend WithEvents FUNCIONARIOTableAdapter As PontoOfflineDataSet_OracleTableAdapters.FUNCIONARIOTableAdapter
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents EMPRESAIDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class
