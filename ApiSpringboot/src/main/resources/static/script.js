@@ -4,10 +4,15 @@
   const api = {
     empresas: '/api/empresas',
     funcionarios: '/api/funcionarios',
-    registros: '/api/registroponto'
+    registros: '/api/registros'
   };
 
   let currentUser = null; // { id, nome, isAdmin }
+  let adminCharts = {
+    chartAvg: null,
+    chartDelays: null,
+    chartCompliance: null
+  };
 
   function fmtDate(d){
     const y = d.getFullYear();
@@ -53,32 +58,33 @@
 
   async function handleLogin(evt){
     evt.preventDefault();
-    const username = $('#username').value.trim();
-    const password = $('#password').value.trim();
+    const cpfInput = $('#cpf').value.trim();
+    const cpf = cpfInput.replace(/\D/g, ''); // Remove formatação
     const loginMsg = $('#loginMsg');
 
     try{
-      if(username.toLowerCase() === 'admin' && password === '1234'){
-        currentUser = { id: null, nome: 'Administrador', isAdmin: true };
-        afterLogin();
-        return;
-      }
-
-      const funcionarios = await jsonFetch(api.funcionarios);
-      const found = funcionarios.find(f => {
-        const byCPF = (f.cpf||'').replace(/\D/g,'') === username.replace(/\D/g,'');
-        const byNome = (f.nome||'').toLowerCase() === username.toLowerCase();
-        return byCPF || byNome;
+      const response = await fetch(`${api.funcionarios}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cpf: cpf })
       });
-      if(!found){
-        setMessage(loginMsg, 'Usuário não encontrado. Informe CPF (somente números) ou Nome exato.');
-        return;
+
+      if(response.ok){
+        const funcionario = await response.json();
+        currentUser = { 
+          id: funcionario.id, 
+          cpf: funcionario.cpf,
+          nome: funcionario.nome, 
+          isAdmin: funcionario.admin === 1 
+        };
+        afterLogin();
+        setMessage(loginMsg, '');
+      }else{
+        setMessage(loginMsg, 'CPF não encontrado', true);
       }
-      currentUser = { id: found.id, nome: found.nome, isAdmin: false };
-      afterLogin();
     }catch(err){
       console.error(err);
-      setMessage(loginMsg, `Falha ao autenticar: ${err.message}`, true);
+      setMessage(loginMsg, `Erro ao conectar: ${err.message}`, true);
     }
   }
 
@@ -195,9 +201,16 @@
       const compVal = compliance;
 
       const palette = ['#2a6df0','#7c3aed','#10b981','#f59e0b','#ef4444'];
-      new Chart(ctx1,{type:'line',data:{labels:labels1,datasets:[{label:'Registros/Dia',data:data1,borderColor:palette[0]}]},options:{plugins:{legend:{display:false}}}});
-      new Chart(ctx2,{type:'bar',data:{labels:labels2,datasets:[{label:'Registros/Func',data:data2,backgroundColor:palette[1]}]},options:{plugins:{legend:{display:false}}}});
-      new Chart(ctx3,{type:'doughnut',data:{labels:['OK','Atrasos'],datasets:[{data:[compVal,100-compVal],backgroundColor:[palette[2],palette[4]]}]},options:{plugins:{legend:{display:false}}}});
+      
+      // Destroy existing charts before creating new ones
+      if (adminCharts.chartAvg) adminCharts.chartAvg.destroy();
+      if (adminCharts.chartDelays) adminCharts.chartDelays.destroy();
+      if (adminCharts.chartCompliance) adminCharts.chartCompliance.destroy();
+      
+      // Create and store new chart instances
+      adminCharts.chartAvg = new Chart(ctx1,{type:'line',data:{labels:labels1,datasets:[{label:'Registros/Dia',data:data1,borderColor:palette[0]}]},options:{plugins:{legend:{display:false}}}});
+      adminCharts.chartDelays = new Chart(ctx2,{type:'bar',data:{labels:labels2,datasets:[{label:'Registros/Func',data:data2,backgroundColor:palette[1]}]},options:{plugins:{legend:{display:false}}}});
+      adminCharts.chartCompliance = new Chart(ctx3,{type:'doughnut',data:{labels:['OK','Atrasos'],datasets:[{data:[compVal,100-compVal],backgroundColor:[palette[2],palette[4]]}]},options:{plugins:{legend:{display:false}}}});
 
     }catch(err){
       console.error(err);
@@ -213,6 +226,25 @@
 
     $$('.tab').forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
     $('#logoutBtn').addEventListener('click', () => location.reload());
+    
+    // Máscara de CPF
+    const cpfInput = $('#cpf');
+    if(cpfInput){
+      cpfInput.addEventListener('input', function(e){
+        let value = e.target.value.replace(/\D/g, '');
+        if(value.length > 11) value = value.slice(0, 11);
+        
+        if(value.length > 9){
+          value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+        }else if(value.length > 6){
+          value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+        }else if(value.length > 3){
+          value = value.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+        }
+        
+        e.target.value = value;
+      });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', init);

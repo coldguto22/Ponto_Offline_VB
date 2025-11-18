@@ -1,7 +1,5 @@
 // Configuração
 const API_BASE = 'http://localhost:8080/api';
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'admin123';
 
 // Estado da aplicação
 let currentUser = null;
@@ -144,26 +142,44 @@ function setupEventListeners() {
 }
 
 // Autenticação
-function handleLogin(e) {
+async function handleLogin(e) {
     e.preventDefault();
     
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const cpfInput = document.getElementById('cpf').value;
+    const cpf = cpfInput.replace(/[.\-]/g, ''); // Remove formatação
     
-    // Simulação de login
-    if ((username === 'user' && password === '1234') || 
-        (username === ADMIN_USER && password === ADMIN_PASS)) {
+    try {
+        const response = await fetch(`${API_BASE}/funcionarios/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ cpf: cpf })
+        });
         
-        currentUser = {
-            username: username,
-            isAdmin: username === ADMIN_USER
-        };
-        
-        showApp();
-        elements.loginMsg.textContent = '';
-        elements.loginMsg.className = 'mensagem';
-    } else {
-        elements.loginMsg.textContent = 'Usuário ou senha inválidos';
+        if (response.ok) {
+            const funcionario = await response.json();
+            
+            currentUser = {
+                id: funcionario.id,
+                cpf: funcionario.cpf,
+                nome: funcionario.nome,
+                isAdmin: funcionario.admin === 1
+            };
+            
+            showApp();
+            elements.loginMsg.textContent = '';
+            elements.loginMsg.className = 'mensagem';
+            
+            // Carregar registros do usuário
+            carregarRegistros();
+        } else {
+            elements.loginMsg.textContent = 'CPF não encontrado';
+            elements.loginMsg.className = 'mensagem erro';
+        }
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        elements.loginMsg.textContent = 'Erro ao conectar com o servidor';
         elements.loginMsg.className = 'mensagem erro';
     }
 }
@@ -191,13 +207,16 @@ function showApp() {
     elements.loginView.classList.add('hidden');
     elements.appView.classList.remove('hidden');
     
-    elements.welcomeTitle.textContent = `Olá, ${currentUser.username}`;
+    elements.welcomeTitle.textContent = `Olá, ${currentUser.nome}`;
     
     if (currentUser.isAdmin) {
         elements.tabAdmin.classList.remove('hidden');
+        elements.btnLimpar.classList.remove('hidden');
     } else {
         elements.tabAdmin.classList.add('hidden');
+        elements.btnLimpar.classList.add('hidden');
     }
+}
     
     carregarRegistros();
 }
@@ -586,3 +605,24 @@ function formatarTipo(tipo) {
 function formatarData(dataString) {
     return new Date(dataString).toLocaleString('pt-BR');
 }
+
+// M�scara de CPF
+setTimeout(() => {
+    const cpfInput = document.getElementById('cpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length > 9) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+            } else if (value.length > 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+            } else if (value.length > 3) {
+                value = value.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+            }
+            
+            e.target.value = value;
+        });
+    }
+}, 100);

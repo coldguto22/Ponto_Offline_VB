@@ -2,6 +2,8 @@ package com.pontoofflineVB.ApiSpringboot.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class Empresa {
     private String logo;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("empresa")
     private List<Funcionario> funcionarios;
 
     // getters e setters

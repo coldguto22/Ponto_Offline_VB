@@ -72,6 +72,7 @@ Public Class Cad_funcionario
             Dim horario As String = cmb_horario.Text.Replace("'", "''")
             Dim dataDemissao As String = If(cmb_demissao.Value = cmb_admissao.Value, "", cmb_demissao.Value.ToString("dd/MM/yyyy"))
             Dim fotoPath As String = If(String.IsNullOrEmpty(diretorio), "", diretorio.Replace("'", "''"))
+            Dim adminValue As Integer = If(chk_admin.Checked, 1, 0)
 
             ' Buscar EMPRESA_ID pela RAZAO_SOCIAL
             Dim empresaId As Object = Nothing
@@ -89,14 +90,14 @@ Public Class Cad_funcionario
 
                 If Not existe Then
                     ' Inserir novo registro - TABELA: FUNCIONARIO
-                    ' COLUNAS: CPF, NOME, DATA_ADMISSAO, DATA_NASCIMENTO, PIS, EMPRESA_ID, FOLHA, CARGO, HORARIO, DATA_DEMISSAO, FOTO
+                    ' COLUNAS: CPF, NOME, DATA_ADMISSAO, DATA_NASCIMENTO, PIS, EMPRESA_ID, FOLHA, CARGO, HORARIO, DATA_DEMISSAO, FOTO, ADMIN
                     sql = "INSERT INTO FUNCIONARIO (CPF, NOME, DATA_ADMISSAO, DATA_NASCIMENTO, PIS, EMPRESA_ID, FOLHA, CARGO, HORARIO"
 
                     If Not String.IsNullOrEmpty(dataDemissao) Then
                         sql &= ", DATA_DEMISSAO"
                     End If
 
-                    sql &= ", FOTO) VALUES ('" & cpf & "', '" & nome & "', TO_DATE('" & dataAdmissao & "', 'DD/MM/YYYY'), TO_DATE('" & dataNasc & "', 'DD/MM/YYYY'), '" & pis & "', "
+                    sql &= ", FOTO, ADMIN) VALUES ('" & cpf & "', '" & nome & "', TO_DATE('" & dataAdmissao & "', 'DD/MM/YYYY'), TO_DATE('" & dataNasc & "', 'DD/MM/YYYY'), '" & pis & "', "
 
                     If empresaId IsNot Nothing Then
                         sql &= empresaId.ToString()
@@ -110,7 +111,7 @@ Public Class Cad_funcionario
                         sql &= ", TO_DATE('" & dataDemissao & "', 'DD/MM/YYYY')"
                     End If
 
-                    sql &= ", '" & fotoPath & "')"
+                    sql &= ", '" & fotoPath & "', " & adminValue & ")"
 
                     If ExecutarComando(sql) Then
                         MsgBox("Funcionário cadastrado com sucesso!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "SUCESSO")
@@ -127,7 +128,8 @@ Public Class Cad_funcionario
          "EMPRESA_ID=" & If(empresaId IsNot Nothing, empresaId.ToString(), "NULL") & ", " &
     "FOLHA='" & folha & "', " &
          "CARGO='" & cargo & "', " &
-      "HORARIO='" & horario & "'"
+      "HORARIO='" & horario & "', " &
+      "ADMIN=" & adminValue
 
                     If Not String.IsNullOrEmpty(dataDemissao) Then
                         sql &= ", DATA_DEMISSAO=TO_DATE('" & dataDemissao & "', 'DD/MM/YYYY')"

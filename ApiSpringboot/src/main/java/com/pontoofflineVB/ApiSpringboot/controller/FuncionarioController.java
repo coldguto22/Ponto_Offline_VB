@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pontoofflineVB.ApiSpringboot.Model.Funcionario;
+import com.pontoofflineVB.ApiSpringboot.dto.LoginRequest;
 import com.pontoofflineVB.ApiSpringboot.repository.FuncionarioRepository;
 
 @RestController
@@ -44,6 +45,15 @@ public class FuncionarioController {
         return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Funcionario> login(@RequestBody LoginRequest request) {
+        List<Funcionario> funcionarios = funcionarioRepository.findByCPF(request.getCpf());
+        if (funcionarios.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(funcionarios.get(0));
+    }
+
     @PostMapping
     public ResponseEntity<Funcionario> criar(@RequestBody Funcionario funcionario) {
         Funcionario salvo = funcionarioRepository.save(funcionario);
@@ -63,6 +73,7 @@ public class FuncionarioController {
             existing.setDataDemissao(funcionario.getDataDemissao());
             existing.setFoto(funcionario.getFoto());
             existing.setDataNascimento(funcionario.getDataNascimento());
+            existing.setAdmin(funcionario.getAdmin());
             existing.setEmpresa(funcionario.getEmpresa());
             Funcionario updated = funcionarioRepository.save(existing);
             return ResponseEntity.ok(updated);

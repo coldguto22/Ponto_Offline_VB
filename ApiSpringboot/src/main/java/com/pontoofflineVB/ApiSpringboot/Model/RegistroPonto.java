@@ -3,6 +3,8 @@ package com.pontoofflineVB.ApiSpringboot.Model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class RegistroPonto {
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
+    @JsonIgnoreProperties({"empresa", "registros"})
     private Funcionario funcionario;
 
     // getters e setters

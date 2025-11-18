@@ -3,7 +3,10 @@ package com.pontoofflineVB.ApiSpringboot.Model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,11 +33,16 @@ public class Funcionario {
     private String foto;
     private LocalDate dataNascimento;
 
+    @Column(name = "ADMIN")
+    private Integer admin;
+
     @ManyToOne
     @JoinColumn(name = "empresa_id")
+    @JsonIgnoreProperties("funcionarios")
     private Empresa empresa;
 
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("funcionario")
     private List<RegistroPonto> registros;
 
     // Getters and Setters
@@ -140,5 +148,13 @@ public class Funcionario {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public Integer getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Integer admin) {
+        this.admin = admin;
     }
 }

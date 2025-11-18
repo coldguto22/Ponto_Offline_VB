@@ -45,6 +45,8 @@ Partial Class Cad_funcionario
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmb_nasc = New System.Windows.Forms.DateTimePicker()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.chk_admin = New System.Windows.Forms.CheckBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.btn_concluir = New System.Windows.Forms.Button()
         CType(Me.img_foto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -245,6 +247,25 @@ Partial Class Cad_funcionario
         Me.Label10.TabIndex = 24
         Me.Label10.Text = "DATA DE NASCIMENTO"
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(293, 223)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(103, 16)
+        Me.Label11.TabIndex = 27
+        Me.Label11.Text = "PERMISSÕES"
+        '
+        'chk_admin
+        '
+        Me.chk_admin.AutoSize = True
+        Me.chk_admin.Location = New System.Drawing.Point(296, 246)
+        Me.chk_admin.Name = "chk_admin"
+        Me.chk_admin.Size = New System.Drawing.Size(158, 20)
+        Me.chk_admin.TabIndex = 28
+        Me.chk_admin.Text = "Administrador"
+        Me.chk_admin.UseVisualStyleBackColor = True
+        '
         'btn_concluir
         '
         Me.btn_concluir.BackColor = System.Drawing.SystemColors.ButtonHighlight
@@ -265,6 +286,8 @@ Partial Class Cad_funcionario
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(744, 555)
+        Me.Controls.Add(Me.chk_admin)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.btn_concluir)
         Me.Controls.Add(Me.cmb_nasc)
         Me.Controls.Add(Me.Label10)
@@ -322,5 +345,7 @@ Partial Class Cad_funcionario
     Friend WithEvents Label9 As Label
     Friend WithEvents cmb_nasc As DateTimePicker
     Friend WithEvents Label10 As Label
+    Friend WithEvents chk_admin As CheckBox
+    Friend WithEvents Label11 As Label
     Friend WithEvents btn_concluir As Button
 End Class
